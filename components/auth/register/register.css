@@ -1,0 +1,592 @@
+.register {
+  width: 100%;
+  min-height: 100vh;
+
+  display: grid;
+  grid-template-columns: 600px 1fr;
+
+  background: #f5f7fb;
+}
+
+/* ========================= */
+/* LEFT SIDE */
+/* ========================= */
+
+.register__left {
+  position: relative;
+
+  background-image: url("/images/hero.png");
+  background-size: cover;
+  background-position: center;
+  background-color: #101828;
+  overflow: hidden;
+}
+
+.register__overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    180deg,
+    rgba(2, 10, 30, 0.88),
+    rgba(2, 10, 30, 0.92)
+  );
+}
+
+.register__left-content {
+  position: relative;
+  z-index: 2;
+
+  height: 100%;
+
+  padding: 3rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.register__logo {
+  margin-bottom: 2rem;
+}
+
+.register__hero-title {
+  color: white;
+
+  font-size: 5rem;
+  line-height: 0.9;
+  font-weight: 900;
+
+  margin-bottom: 2rem;
+}
+
+.register__hero-title span {
+  color: #3f5cff;
+}
+
+.register__hero-description {
+  color: rgba(255, 255, 255, 0.82);
+
+  line-height: 1.8;
+  font-size: 1.1rem;
+
+  margin-bottom: 3rem;
+}
+
+.register__features {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.register__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.register__feature-icon {
+  min-width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  background: rgba(63, 92, 255, 0.18);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #3f5cff;
+}
+
+.register__feature h3 {
+  color: white;
+
+  font-size: 1.1rem;
+  font-weight: 700;
+
+  margin-bottom: 0.3rem;
+}
+
+.register__feature p {
+  color: rgba(255, 255, 255, 0.72);
+
+  line-height: 1.7;
+}
+
+/* ========================= */
+/* RIGHT SIDE */
+/* ========================= */
+
+.register__right {
+  padding: 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register__card {
+  width: 100%;
+  max-width: 1100px;
+
+  background: white;
+
+  border-radius: 28px;
+
+  padding: 3.5rem;
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+}
+
+.register__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 2rem;
+
+  margin-bottom: 3rem;
+}
+
+.register__header h2 {
+  font-size: 4rem;
+  font-weight: 900;
+
+  line-height: 1;
+
+  color: #101828;
+
+  margin-bottom: 0.7rem;
+}
+
+.register__header p {
+  color: #667085;
+
+  font-size: 1.05rem;
+}
+
+.register__signin {
+  color: #667085;
+
+  font-size: 1rem;
+}
+
+.register__signin a {
+  color: #3f5cff;
+
+  font-weight: 700;
+}
+
+/* ========================= */
+/* ROLES */
+/* ========================= */
+
+.register__roles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 2rem;
+
+  margin-bottom: 3rem;
+}
+
+.register__role {
+  position: relative;
+
+  width: 260px;
+  min-height: 220px;
+
+  border: 1.5px solid #d9dce3;
+  border-radius: 22px;
+
+  background: white;
+
+  padding: 2.5rem 2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  transition: 0.35s ease;
+}
+
+.register__role:hover {
+  transform: translateY(-6px);
+
+  border-color: #3f5cff;
+
+  box-shadow: 0 20px 40px rgba(63, 92, 255, 0.12);
+}
+
+.register__role--active {
+  border-color: #3f5cff;
+
+  box-shadow: 0 20px 40px rgba(63, 92, 255, 0.12);
+}
+
+.register__radio {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  border: 2px solid #98a2b3;
+}
+
+.register__role--active .register__radio {
+  border-color: #3f5cff;
+}
+
+.register__role--active .register__radio::after {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #3f5cff;
+
+  transform: translate(-50%, -50%);
+}
+
+.register__role-icon {
+  width: 74px;
+  height: 74px;
+
+  border-radius: 20px;
+
+  background: rgba(63, 92, 255, 0.08);
+
+  color: #3f5cff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 1.4rem;
+}
+
+.register__role h3 {
+  color: #111827;
+
+  font-size: 1.5rem;
+  font-weight: 800;
+
+  margin-bottom: 0.9rem;
+}
+
+.register__role p {
+  color: #667085;
+
+  font-size: 1rem;
+  line-height: 1.8;
+
+  max-width: 200px;
+}
+
+/* ========================= */
+/* FORM */
+/* ========================= */
+
+.register__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.7rem;
+}
+
+.register__row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 1.5rem;
+}
+
+.register__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.register__field label {
+  color: #101828;
+
+  font-weight: 700;
+}
+
+.register__field input {
+  width: 100%;
+  height: 60px;
+
+  border: 1px solid #d0d5dd;
+  border-radius: 14px;
+
+  padding: 0 1rem;
+
+  outline: none;
+
+  font-size: 1rem;
+
+  transition: 0.3s;
+}
+
+.register__field input:focus {
+  border-color: #3f5cff;
+
+  box-shadow: 0 0 0 4px rgba(63, 92, 255, 0.08);
+}
+
+.register__input {
+  height: 60px;
+
+  border: 1px solid #d0d5dd;
+  border-radius: 14px;
+
+  padding: 0 1rem;
+
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+  color: #98a2b3;
+
+  transition: 0.3s;
+}
+
+.register__input:focus-within {
+  border-color: #3f5cff;
+
+  box-shadow: 0 0 0 4px rgba(63, 92, 255, 0.08);
+}
+
+.register__input input {
+  width: 100%;
+  height: auto;
+
+  border: none;
+  outline: none;
+
+  font-size: 1rem;
+
+  background: transparent;
+}
+
+/* ========================= */
+/* TERMS */
+/* ========================= */
+
+.register__terms {
+  display: flex;
+  align-items: center;
+
+  gap: 0.8rem;
+}
+
+.register__terms p {
+  color: #667085;
+}
+
+.register__terms span {
+  color: #3f5cff;
+
+  font-weight: 600;
+}
+
+/* ========================= */
+/* BUTTON */
+/* ========================= */
+
+.register__submit {
+  height: 62px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: linear-gradient(90deg, #3f5cff, #2748e8);
+
+  color: white;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.register__submit:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 15px 35px rgba(63, 92, 255, 0.25);
+}
+
+/* ========================= */
+/* DIVIDER */
+/* ========================= */
+
+.register__divider {
+  position: relative;
+
+  text-align: center;
+}
+
+.register__divider::before {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  left: 0;
+
+  width: 100%;
+  height: 1px;
+
+  background: #e4e7ec;
+}
+
+.register__divider span {
+  position: relative;
+
+  background: white;
+
+  padding: 0 1rem;
+
+  color: #98a2b3;
+}
+
+/* ========================= */
+/* SOCIAL */
+/* ========================= */
+
+.register__socials {
+  display: flex;
+  justify-content: center;
+}
+
+.register__socials button {
+  width: 100%;
+  max-width: 420px;
+
+  height: 60px;
+
+  border: 1px solid #d0d5dd;
+  border-radius: 14px;
+
+  background: white;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  transition: 0.3s ease;
+
+  cursor: pointer;
+}
+
+.register__socials button:hover {
+  border-color: #3f5cff;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 25px rgba(63, 92, 255, 0.08);
+}
+
+/* ========================= */
+/* SECURE */
+/* ========================= */
+
+.register__secure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.8rem;
+
+  margin-top: 1rem;
+
+  text-align: center;
+
+  color: #98a2b3;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media screen and (max-width: 1200px) {
+  .register {
+    grid-template-columns: 1fr;
+  }
+
+  .register__left {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .register__card {
+    padding: 2rem;
+  }
+
+  .register__header {
+    flex-direction: column;
+  }
+
+  .register__header h2 {
+    font-size: 3rem;
+  }
+
+  .register__roles {
+    flex-direction: column;
+  }
+
+  .register__role {
+    width: 100%;
+  }
+
+  .register__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .register__right {
+    padding: 1rem;
+  }
+
+  .register__card {
+    padding: 1.5rem;
+
+    border-radius: 20px;
+  }
+
+  .register__header h2 {
+    font-size: 2.3rem;
+  }
+
+  .register__hero-title {
+    font-size: 3rem;
+  }
+
+  .register__secure {
+    flex-direction: column;
+  }
+}

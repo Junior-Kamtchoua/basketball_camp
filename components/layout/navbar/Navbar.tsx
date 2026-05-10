@@ -1,0 +1,70 @@
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
+
+import "./navbar.css";
+
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Programs", href: "/programs" },
+  { label: "Schedule", href: "/schedule" },
+  { label: "Coaches", href: "/coaches" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Forms", href: "/forms" },
+  { label: "Contact", href: "/contact" },
+];
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const pathname = usePathname();
+
+  return (
+    <header className="navbar">
+      <div className="navbar__container">
+        <Link href="/" className="navbar__logo">
+          <Image
+            src="/images/logo1.png"
+            alt="FBA Logo"
+            width={170}
+            height={170}
+            priority
+            className="navbar__logo-image"
+          />
+        </Link>
+
+        <nav className={`navbar__nav ${isOpen ? "navbar__nav--active" : ""}`}>
+          {navLinks.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className={`navbar__link ${
+                pathname === link.href ? "navbar__link--active" : ""
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        <button className="navbar__button">JOIN NOW</button>
+
+        <div
+          className={`navbar__hamburger ${
+            isOpen ? "navbar__hamburger--active" : ""
+          }`}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </header>
+  );
+}

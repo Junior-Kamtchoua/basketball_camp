@@ -1,0 +1,166 @@
+.stats {
+  position: relative;
+
+  width: 100%;
+
+  padding: 6rem 0;
+
+  background-image: url("/images/hero.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+}
+
+.stats__overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    90deg,
+    rgba(1, 10, 28, 0.96),
+    rgba(2, 16, 44, 0.9)
+  );
+}
+
+.stats__container {
+  position: relative;
+  z-index: 2;
+
+  width: 92%;
+  max-width: 1500px;
+
+  margin: auto;
+}
+
+.stats__header {
+  text-align: center;
+
+  margin-bottom: 4rem;
+}
+
+.stats__title {
+  color: white;
+
+  font-size: 3.5rem;
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  margin-bottom: 1.2rem;
+}
+
+.stats__line {
+  width: 60px;
+  height: 4px;
+
+  background: #3f5cff;
+
+  border-radius: 999px;
+
+  margin: auto;
+}
+
+.stats__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.stat__card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 2rem;
+}
+
+.stat__card:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  right: 0;
+
+  transform: translateY(-50%);
+
+  width: 1px;
+  height: 120px;
+
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.stat__icon {
+  color: #3f5cff;
+
+  margin-bottom: 1.5rem;
+}
+
+.stat__number {
+  color: white;
+
+  font-size: 4rem;
+  font-weight: 900;
+
+  margin-bottom: 0.7rem;
+}
+
+.stat__label {
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 1.15rem;
+  font-weight: 600;
+
+  text-transform: uppercase;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media screen and (max-width: 992px) {
+  .stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    row-gap: 3rem;
+  }
+
+  .stat__card:nth-child(2)::after {
+    display: none;
+  }
+
+  .stats__title {
+    font-size: 2.8rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .stats {
+    padding: 5rem 0;
+  }
+
+  .stats__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat__card::after {
+    display: none;
+  }
+
+  .stats__title {
+    font-size: 2rem;
+  }
+
+  .stat__number {
+    font-size: 3rem;
+  }
+
+  .stat__label {
+    font-size: 1rem;
+  }
+}

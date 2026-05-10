@@ -1,0 +1,182 @@
+.hero {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  background-image: url("/images/hero1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.95) 15%,
+    rgba(0, 0, 0, 0.65) 45%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+}
+
+.hero__container {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+
+  padding: 12rem 5rem 6rem;
+}
+
+.hero__content {
+  max-width: 700px;
+}
+
+.hero__subtitle {
+  display: inline-block;
+
+  margin-bottom: 1.5rem;
+
+  color: #3f5cff;
+
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.hero__title {
+  color: white;
+
+  font-size: 6rem;
+  line-height: 0.9;
+  font-weight: 900;
+
+  margin-bottom: 2rem;
+}
+
+.hero__title span {
+  color: #3f5cff;
+}
+
+.hero__description {
+  max-width: 650px;
+
+  color: #d5d5d5;
+
+  font-size: 1.2rem;
+  line-height: 1.8;
+
+  margin-bottom: 2.5rem;
+}
+
+.hero__buttons {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.hero__primary-btn,
+.hero__secondary-btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  padding: 1.2rem 2.5rem;
+
+  border-radius: 12px;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  transition: 0.3s;
+}
+
+.hero__primary-btn {
+  background: #3f5cff;
+  color: white;
+}
+
+.hero__primary-btn:hover {
+  background: #2748e8;
+}
+
+.hero__secondary-btn {
+  background: transparent;
+
+  border: 1px solid rgba(255, 255, 255, 0.7);
+
+  color: white;
+}
+
+.hero__secondary-btn:hover {
+  background: white;
+  color: black;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media screen and (max-width: 992px) {
+  .hero {
+    background-position: 70% center;
+  }
+
+  .hero__container {
+    padding: 10rem 2rem 5rem;
+  }
+
+  .hero__title {
+    font-size: 5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero {
+    min-height: auto;
+  }
+
+  .hero__overlay {
+    background: rgba(0, 0, 0, 0.72);
+  }
+
+  .hero__container {
+    padding: 9rem 1.5rem 4rem;
+  }
+
+  .hero__title {
+    font-size: 3.8rem;
+  }
+
+  .hero__description {
+    font-size: 1rem;
+  }
+
+  .hero__buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__primary-btn,
+  .hero__secondary-btn {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .hero__title {
+    font-size: 3rem;
+  }
+
+  .hero__subtitle {
+    font-size: 0.85rem;
+  }
+}
