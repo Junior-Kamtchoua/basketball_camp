@@ -1,0 +1,51 @@
+.overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.7);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  z-index: 300;
+}
+
+.modal {
+  width: 90%;
+
+  max-width: 800px;
+
+  background: var(--card-bg);
+
+  border-radius: 24px;
+
+  padding: 24px;
+
+  position: relative;
+}
+
+.close {
+  position: absolute;
+
+  top: 20px;
+
+  right: 20px;
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.image {
+  width: 100%;
+
+  border-radius: 18px;
+
+  object-fit: cover;
+}

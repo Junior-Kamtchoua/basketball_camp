@@ -1,0 +1,15 @@
+.chart {
+  background: var(--card-bg);
+
+  padding: 24px;
+
+  border-radius: 20px;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  margin-bottom: 32px;
+}
+
+.header {
+  margin-bottom: 24px;
+}

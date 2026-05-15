@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.card {
+  background: var(--card-bg);
+
+  border-radius: 20px;
+
+  padding: 20px;
+
+  border: 1px solid var(--border-color);
+
+  transition: 0.25s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+
+  border-color: #2563eb;
+}

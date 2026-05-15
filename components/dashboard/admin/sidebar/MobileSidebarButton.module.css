@@ -1,0 +1,25 @@
+.button {
+  width: 44px;
+  height: 44px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: white;
+
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 900px) {
+  .button {
+    display: flex;
+  }
+}

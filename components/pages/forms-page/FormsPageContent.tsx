@@ -6,6 +6,7 @@ import {
   HeartPulse,
   Users,
 } from "lucide-react";
+import "./FormsPageContent.css";
 
 const forms = [
   {

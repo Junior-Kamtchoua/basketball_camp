@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { FaWhatsapp } from "react-icons/fa";
+import { IoLocationSharp } from "react-icons/io5";
+
 import "./footer.css";
 
 export default function Footer() {
@@ -37,9 +40,25 @@ export default function Footer() {
             <div className="footer__links">
               <h3>Contact</h3>
 
-              <p>Yaoundé, Cameroon</p>
-              <p>+237 6 00 00 00 00</p>
-              <p>contact@fba.com</p>
+              <p className="footer__contact">
+                <IoLocationSharp className="footer__icon" />
+                450 South Beauchamp Boulevard
+              </p>
+
+              <a
+                href="https://wa.me/14232009555"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer__contact footer__whatsapp"
+              >
+                <FaWhatsapp className="footer__icon whatsapp" />
+                423 200 9555
+              </a>
+
+              <p className="footer__contact">
+                <IoLocationSharp className="footer__icon" />
+                Princeton, Texas 75407, USA
+              </p>
             </div>
           </div>
         </div>

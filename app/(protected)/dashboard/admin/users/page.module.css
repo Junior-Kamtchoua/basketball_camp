@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 24px;
+}
+
+.top h1 {
+  font-size: 2rem;
+
+  font-weight: 700;
+}
+
+.top p {
+  margin-top: 8px;
+
+  color: #6b7280;
+}

@@ -1,0 +1,21 @@
+.input {
+  width: 100%;
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  border: 1px solid var(--border-color);
+
+  background: var(--card-bg);
+
+  color: var(--text-color);
+
+  outline: none;
+
+  transition: 0.2s;
+}
+
+.input:focus {
+  border-color: #2563eb;
+}

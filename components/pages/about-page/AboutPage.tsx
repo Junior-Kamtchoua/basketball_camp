@@ -1,4 +1,5 @@
 import { Trophy, Users, Dumbbell, Target } from "lucide-react";
+import "./about-page.css";
 
 export default function AboutPageContent() {
   return (

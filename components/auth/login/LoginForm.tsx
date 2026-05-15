@@ -1,12 +1,16 @@
 "use client";
 
+import { useState } from "react";
+
 import Link from "next/link";
+
 import Image from "next/image";
 
 import {
   Mail,
   Lock,
   Eye,
+  EyeOff,
   ArrowRight,
   BarChart3,
   Calendar,
@@ -14,84 +18,92 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
+import { getDashboardRoute } from "@/lib/getDashboardRoute";
+
 import "./login.css";
 
+interface LoginUser {
+  id: string;
+
+  role: "ADMIN" | "USER";
+
+  must_change_password: boolean;
+}
+
+interface ApiLoginResponse {
+  success?: boolean;
+
+  user?: LoginUser;
+
+  error?: string;
+}
+
 export default function LoginForm() {
+  const [email, setEmail] = useState("");
+
+  const [password, setPassword] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+
+  const [error, setError] = useState("");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    setError("");
+
+    try {
+      setLoading(true);
+
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+
+        credentials: "include",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const result: ApiLoginResponse = await response.json();
+
+      if (!response.ok) {
+        setError(result.error || "Invalid credentials");
+
+        return;
+      }
+
+      if (!result.user) {
+        setError("Login failed");
+
+        return;
+      }
+
+      if (result.user.must_change_password) {
+        window.location.assign("/change-password");
+
+        return;
+      }
+
+      window.location.assign(getDashboardRoute(result.user.role));
+    } catch {
+      setError("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <section className="login">
       <div className="login__left">
         <div className="login__overlay"></div>
-
-        <div className="login__left-content">
-          <Image
-            src="/images/logo1.png"
-            alt="FBA Logo"
-            width={220}
-            height={220}
-            className="login__logo"
-          />
-
-          <h1 className="login__title">
-            WELCOME BACK
-            <br />
-            TO <span>GREATNESS</span>
-          </h1>
-
-          <p className="login__description">
-            Login to your account to manage schedules, track progress, and stay
-            connected with the FBA community.
-          </p>
-
-          <div className="login__features">
-            <div className="login__feature">
-              <div className="login__feature-icon">
-                <BarChart3 size={22} />
-              </div>
-
-              <div>
-                <h3>Track Progress</h3>
-
-                <p>Monitor skills, attendance and performance.</p>
-              </div>
-            </div>
-
-            <div className="login__feature">
-              <div className="login__feature-icon">
-                <Calendar size={22} />
-              </div>
-
-              <div>
-                <h3>Stay Updated</h3>
-
-                <p>View schedules, events and announcements.</p>
-              </div>
-            </div>
-
-            <div className="login__feature">
-              <div className="login__feature-icon">
-                <MessageCircle size={22} />
-              </div>
-
-              <div>
-                <h3>Connect Easily</h3>
-
-                <p>Message coaches and stay in the loop.</p>
-              </div>
-            </div>
-
-            <div className="login__feature">
-              <div className="login__feature-icon">
-                <ShieldCheck size={22} />
-              </div>
-
-              <div>
-                <h3>Secure & Private</h3>
-
-                <p>Your data is safe with us.</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div className="login__right">
@@ -102,14 +114,22 @@ export default function LoginForm() {
             <p>Enter your credentials to access your account.</p>
           </div>
 
-          <form className="login__form">
+          <form className="login__form" onSubmit={handleSubmit}>
+            {error && <div className="login__error">{error}</div>}
+
             <div className="login__field">
               <label>Email Address</label>
 
               <div className="login__input">
                 <Mail size={20} />
 
-                <input type="email" placeholder="Enter your email address" />
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
               </div>
             </div>
 
@@ -119,9 +139,21 @@ export default function LoginForm() {
               <div className="login__input">
                 <Lock size={20} />
 
-                <input type="password" placeholder="Enter your password" />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
 
-                <Eye size={20} />
+                <button
+                  type="button"
+                  className="login__eye"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
               </div>
             </div>
 
@@ -135,8 +167,9 @@ export default function LoginForm() {
               <Link href="/forgot-password">Forgot Password?</Link>
             </div>
 
-            <button type="submit" className="login__button">
-              Login
+            <button type="submit" className="login__button" disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
+
               <ArrowRight size={20} />
             </button>
 

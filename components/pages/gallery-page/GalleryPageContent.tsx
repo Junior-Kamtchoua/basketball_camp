@@ -1,5 +1,5 @@
 import { Camera, Trophy, Users, Dumbbell } from "lucide-react";
-
+import "./GalleryPageContent.css";
 const images = [
   {
     image: "/images/gallery-1.png",

@@ -1,0 +1,291 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 2rem;
+
+  border-radius: 28px;
+
+  background: linear-gradient(135deg, #2563eb, #1e3a8a);
+
+  color: white;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+
+  margin-bottom: 0.7rem;
+}
+
+.hero p {
+  opacity: 0.9;
+
+  max-width: 600px;
+
+  line-height: 1.7;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--card-bg);
+
+  border-radius: 24px;
+
+  padding: 1.5rem;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.card p {
+  color: var(--text-secondary);
+}
+
+.iconBlue,
+.iconGreen,
+.iconOrange,
+.iconPurple {
+  width: 56px;
+  height: 56px;
+
+  border-radius: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+}
+
+.iconBlue {
+  background: #2563eb;
+}
+
+.iconGreen {
+  background: #16a34a;
+}
+
+.iconOrange {
+  background: #ea580c;
+}
+
+.iconPurple {
+  background: #9333ea;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+  gap: 1.5rem;
+}
+
+.programCard {
+  background: var(--card-bg);
+
+  border-radius: 28px;
+
+  padding: 2rem;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+
+  transition: 0.3s ease;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.programCard:hover {
+  transform: translateY(-6px);
+}
+
+.programTop {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.badge {
+  background: rgba(37, 99, 235, 0.12);
+
+  color: #2563eb;
+
+  padding: 0.45rem 1rem;
+
+  border-radius: 999px;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.programCard h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.programCard p {
+  color: var(--text-secondary);
+
+  line-height: 1.7;
+}
+
+.programStats {
+  display: flex;
+  justify-content: space-between;
+}
+
+.programStats span {
+  color: var(--text-secondary);
+
+  font-size: 0.9rem;
+}
+
+.programStats strong {
+  display: block;
+
+  margin-top: 0.35rem;
+
+  font-size: 1.1rem;
+}
+
+.progressSection {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.7rem;
+}
+
+.progressTop {
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.progressBar {
+  height: 10px;
+
+  border-radius: 999px;
+
+  background: rgba(148, 163, 184, 0.2);
+
+  overflow: hidden;
+}
+
+.progressFill {
+  width: 72%;
+  height: 100%;
+
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+
+  border-radius: 999px;
+}
+
+.button {
+  height: 52px;
+
+  border: none;
+  border-radius: 16px;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.button:hover {
+  background: #1d4ed8;
+}
+
+.empty {
+  padding: 5rem 2rem;
+
+  text-align: center;
+
+  background: var(--card-bg);
+
+  border-radius: 28px;
+}
+
+.empty h2 {
+  font-size: 2rem;
+
+  margin-bottom: 1rem;
+}
+
+.empty p {
+  color: var(--text-secondary);
+}
+
+@media screen and (max-width: 1100px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero {
+    padding: 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .programCard {
+    padding: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .hero {
+    border-radius: 22px;
+  }
+
+  .hero h1 {
+    font-size: 1.7rem;
+  }
+
+  .programStats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

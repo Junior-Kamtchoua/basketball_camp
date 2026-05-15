@@ -1,20 +1,30 @@
 "use client";
 
 import Link from "next/link";
+
 import Image from "next/image";
+
 import { useState } from "react";
+
 import { usePathname } from "next/navigation";
 
 import "./navbar.css";
 
 const navLinks = [
   { label: "Home", href: "/" },
+
   { label: "About", href: "/about" },
+
   { label: "Programs", href: "/programs" },
+
   { label: "Schedule", href: "/schedule" },
+
   { label: "Coaches", href: "/coaches" },
+
   { label: "Gallery", href: "/gallery" },
+
   { label: "Forms", href: "/forms" },
+
   { label: "Contact", href: "/contact" },
 ];
 
@@ -23,10 +33,14 @@ export default function Navbar() {
 
   const pathname = usePathname();
 
+  function closeMenu() {
+    setIsOpen(false);
+  }
+
   return (
     <header className="navbar">
       <div className="navbar__container">
-        <Link href="/" className="navbar__logo">
+        <Link href="/" className="navbar__logo" onClick={closeMenu}>
           <Image
             src="/images/logo1.png"
             alt="FBA Logo"
@@ -45,25 +59,40 @@ export default function Navbar() {
               className={`navbar__link ${
                 pathname === link.href ? "navbar__link--active" : ""
               }`}
-              onClick={() => setIsOpen(false)}
+              onClick={closeMenu}
             >
               {link.label}
             </Link>
           ))}
+
+          <div className="navbar__actions">
+            <Link href="/login" className="navbar__login" onClick={closeMenu}>
+              LOGIN
+            </Link>
+
+            <Link
+              href="/register"
+              className="navbar__register"
+              onClick={closeMenu}
+            >
+              REGISTER
+            </Link>
+          </div>
         </nav>
 
-        <button className="navbar__button">JOIN NOW</button>
-
-        <div
+        <button
           className={`navbar__hamburger ${
             isOpen ? "navbar__hamburger--active" : ""
           }`}
           onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
         >
           <span></span>
+
           <span></span>
+
           <span></span>
-        </div>
+        </button>
       </div>
     </header>
   );

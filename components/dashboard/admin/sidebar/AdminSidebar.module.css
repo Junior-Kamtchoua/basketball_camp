@@ -1,0 +1,175 @@
+.sidebar {
+  width: 280px;
+
+  min-height: 100vh;
+
+  background: #071a52;
+
+  color: white;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  padding: 24px 18px;
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 50;
+
+  transition: 0.3s;
+}
+
+.top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 32px;
+}
+
+.logoWrapper {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.logoImage {
+  object-fit: contain;
+}
+
+.logo {
+  font-size: 1.4rem;
+
+  font-weight: 700;
+}
+
+.nav {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  flex: 1;
+}
+
+.link {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 14px 16px;
+
+  border-radius: 14px;
+
+  color: white;
+
+  text-decoration: none;
+
+  transition: 0.2s;
+}
+
+.link:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.active {
+  background: #2563eb;
+}
+
+.bottom {
+  margin-top: 24px;
+}
+
+.logout {
+  width: 100%;
+
+  border: none;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  color: white;
+
+  padding: 14px 16px;
+
+  border-radius: 14px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.logout:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.4);
+
+  z-index: 40;
+}
+
+.closeButton {
+  display: none;
+
+  border: none;
+
+  background: transparent;
+
+  color: white;
+
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    position: fixed;
+
+    left: -100%;
+
+    top: 0;
+
+    height: 100vh;
+  }
+
+  .open {
+    left: 0;
+  }
+
+  .closeButton {
+    display: flex;
+  }
+}
+
+@media (max-width: 640px) {
+  .sidebar {
+    width: 100%;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+  }
+}

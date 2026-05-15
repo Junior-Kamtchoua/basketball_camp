@@ -1,0 +1,21 @@
+.container {
+  height: calc(100vh - 120px);
+
+  display: flex;
+
+  overflow: hidden;
+
+  border-radius: 24px;
+
+  background: var(--card-bg);
+
+  border: 1px solid var(--border-color);
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+
+    height: auto;
+  }
+}

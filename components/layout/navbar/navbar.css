@@ -112,8 +112,16 @@
 .navbar__hamburger {
   display: none;
 
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  backdrop-filter: blur(10px);
 
   align-items: center;
   justify-content: center;
@@ -125,11 +133,17 @@
   cursor: pointer;
 
   z-index: 1002;
+
+  transition: 0.3s ease;
+}
+
+.navbar__hamburger:hover {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .navbar__hamburger span {
-  width: 28px;
-  height: 3px;
+  width: 24px;
+  height: 2.5px;
 
   background: white;
 
@@ -252,4 +266,49 @@
   .navbar__link {
     font-size: 1.05rem;
   }
+}
+
+.navbar__actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+.navbar__login,
+.navbar__register {
+  text-decoration: none;
+
+  padding: 12px 20px;
+
+  border-radius: 12px;
+
+  font-weight: 600;
+
+  transition: 0.2s;
+}
+
+.navbar__login {
+  background: transparent;
+
+  border: 1px solid white;
+
+  color: white;
+}
+
+.navbar__login:hover {
+  background: white;
+
+  color: black;
+}
+
+.navbar__register {
+  background: #2563eb;
+
+  color: white;
+}
+
+.navbar__register:hover {
+  opacity: 0.9;
 }

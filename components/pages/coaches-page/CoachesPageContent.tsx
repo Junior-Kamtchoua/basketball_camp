@@ -1,4 +1,5 @@
 import { Trophy, Dumbbell, Users, Target } from "lucide-react";
+import "./CoachesPageContent.css";
 
 const coaches = [
   {

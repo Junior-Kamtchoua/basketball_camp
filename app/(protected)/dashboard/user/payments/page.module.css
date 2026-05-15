@@ -1,0 +1,231 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2rem;
+}
+
+.hero {
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 2.7rem;
+
+  border-radius: 32px;
+
+  background: linear-gradient(135deg, #1d4ed8, #172554);
+
+  color: white;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18);
+}
+
+.hero::before {
+  content: "";
+
+  position: absolute;
+
+  top: -120px;
+  right: -120px;
+
+  width: 280px;
+  height: 280px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  filter: blur(20px);
+}
+
+.hero h1 {
+  position: relative;
+  z-index: 2;
+
+  font-size: 3rem;
+  font-weight: 900;
+
+  margin-bottom: 1rem;
+
+  color: white;
+}
+
+.hero p {
+  position: relative;
+  z-index: 2;
+
+  max-width: 720px;
+
+  color: rgba(255, 255, 255, 0.95);
+
+  line-height: 1.9;
+
+  font-size: 1.05rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 1.5rem;
+}
+
+.card {
+  padding: 2rem;
+
+  border-radius: 28px;
+
+  background: var(--card-bg);
+
+  border: 1px solid var(--border-color);
+
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+
+  box-shadow: 0 25px 45px rgba(37, 99, 235, 0.12);
+}
+
+.card h3 {
+  font-size: 2.2rem;
+  font-weight: 900;
+
+  margin-bottom: 0.7rem;
+
+  color: var(--text-primary);
+}
+
+.card p {
+  color: var(--text-secondary);
+
+  font-size: 0.98rem;
+
+  font-weight: 600;
+}
+
+.empty {
+  padding: 5rem 2rem;
+
+  border-radius: 30px;
+
+  background: var(--card-bg);
+
+  border: 1px solid var(--border-color);
+
+  text-align: center;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+}
+
+.empty h2 {
+  font-size: 2rem;
+  font-weight: 900;
+
+  margin-bottom: 1rem;
+
+  color: var(--text-primary);
+}
+
+.empty p {
+  color: var(--text-secondary);
+
+  line-height: 1.8;
+
+  max-width: 500px;
+
+  margin: 0 auto;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.55rem 1rem;
+
+  border-radius: 999px;
+
+  font-size: 0.82rem;
+  font-weight: 800;
+
+  letter-spacing: 0.3px;
+}
+
+.paid {
+  background: rgba(34, 197, 94, 0.15);
+
+  color: #16a34a;
+
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.pending {
+  background: rgba(234, 179, 8, 0.16);
+
+  color: #ca8a04;
+
+  border: 1px solid rgba(234, 179, 8, 0.25);
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media screen and (max-width: 1200px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero {
+    padding: 2rem;
+  }
+
+  .hero h1 {
+    font-size: 2.3rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .hero {
+    padding: 1.5rem;
+
+    border-radius: 24px;
+  }
+
+  .hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .card h3 {
+    font-size: 1.7rem;
+  }
+
+  .empty {
+    padding: 4rem 1.5rem;
+  }
+
+  .empty h2 {
+    font-size: 1.6rem;
+  }
+}

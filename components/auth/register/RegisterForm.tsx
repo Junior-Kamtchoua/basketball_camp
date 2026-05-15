@@ -1,262 +1,257 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 
+import Link from "next/link";
+
+import { useRouter } from "next/navigation";
+
+import toast from "react-hot-toast";
+
 import {
-  Users,
-  Dumbbell,
+  User,
   Mail,
-  Phone,
   Lock,
-  Eye,
   ArrowRight,
-  Calendar,
-  BarChart3,
+  Home,
+  LogIn,
   ShieldCheck,
 } from "lucide-react";
 
-import "./register.css";
+import styles from "./Register.module.css";
+
+type AccountType = "PLAYER" | "PARENT";
+
+interface RegisterFormData {
+  first_name: string;
+
+  last_name: string;
+
+  email: string;
+
+  password: string;
+
+  account_type: AccountType;
+}
+
+interface RegisterResponse {
+  data?: {
+    register: {
+      id: string;
+    };
+  };
+
+  errors?: {
+    message: string;
+  }[];
+}
 
 export default function RegisterForm() {
-  const [selectedRole, setSelectedRole] = useState("parent");
+  const router = useRouter();
+
+  const [loading, setLoading] = useState(false);
+
+  const [form, setForm] = useState<RegisterFormData>({
+    first_name: "",
+
+    last_name: "",
+
+    email: "",
+
+    password: "",
+
+    account_type: "PLAYER",
+  });
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      const response = await fetch("/api/graphql", {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          query: `
+                mutation Register(
+                  $input: RegisterInput!
+                ) {
+                  register(
+                    input: $input
+                  ) {
+                    id
+                  }
+                }
+              `,
+
+          variables: {
+            input: {
+              first_name: form.first_name,
+
+              last_name: form.last_name,
+
+              email: form.email,
+
+              password: form.password,
+            },
+          },
+        }),
+      });
+
+      const result: RegisterResponse = await response.json();
+
+      if (result.errors) {
+        toast.error(result.errors[0].message);
+
+        return;
+      }
+
+      toast.success("Account created successfully");
+
+      setTimeout(() => {
+        router.push("/login");
+      }, 1200);
+    } catch {
+      toast.error("Registration failed");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
-    <section className="register">
-      {/* LEFT SIDE */}
-      <div className="register__left">
-        <div className="register__overlay"></div>
+    <section className={styles.register}>
+      <div className={styles.overlay} />
 
-        <div className="register__left-content">
-          <Image
-            src="/images/logo1.png"
-            alt="FBA Logo"
-            width={230}
-            height={230}
-            className="register__logo"
-          />
+      <div className={styles.card}>
+        <div className={styles.topActions}>
+          <Link href="/" className={styles.topButton}>
+            <Home size={18} />
+            Home
+          </Link>
 
-          <h1 className="register__hero-title">
-            JOIN FBA
-            <span> FAMILY</span>
-          </h1>
-
-          <p className="register__hero-description">
-            Create your account and take the first step toward developing
-            skills, building character, and achieving greatness.
-          </p>
-
-          <div className="register__features">
-            <div className="register__feature">
-              <div className="register__feature-icon">
-                <Users size={20} />
-              </div>
-
-              <div>
-                <h3>Expert Coaching</h3>
-
-                <p>Learn from experienced and passionate coaches.</p>
-              </div>
-            </div>
-
-            <div className="register__feature">
-              <div className="register__feature-icon">
-                <BarChart3 size={20} />
-              </div>
-
-              <div>
-                <h3>Track Progress</h3>
-
-                <p>Monitor skills, attendance and improvement.</p>
-              </div>
-            </div>
-
-            <div className="register__feature">
-              <div className="register__feature-icon">
-                <Calendar size={20} />
-              </div>
-
-              <div>
-                <h3>Stay Connected</h3>
-
-                <p>Get updates, reminders and announcements.</p>
-              </div>
-            </div>
-
-            <div className="register__feature">
-              <div className="register__feature-icon">
-                <ShieldCheck size={20} />
-              </div>
-
-              <div>
-                <h3>Safe & Secure</h3>
-
-                <p>Your data is protected and always private.</p>
-              </div>
-            </div>
-          </div>
+          <Link href="/login" className={styles.topButton}>
+            <LogIn size={18} />
+            Login
+          </Link>
         </div>
-      </div>
 
-      {/* RIGHT SIDE */}
-      <div className="register__right">
-        <div className="register__card">
-          <div className="register__header">
-            <div>
-              <h2>Create Your Account</h2>
+        <div className={styles.header}>
+          <div className={styles.badge}>
+            <ShieldCheck size={18} />
+            Basketball Academy
+          </div>
 
-              <p>Let&apos;s get started. Choose your role to continue.</p>
+          <h1>Create Your Account</h1>
+
+          <p>Join the next generation of basketball excellence.</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.grid}>
+            <div className={styles.inputWrapper}>
+              <User size={18} />
+
+              <input
+                type="text"
+                placeholder="First Name"
+                value={form.first_name}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+
+                    first_name: e.target.value,
+                  })
+                }
+                required
+              />
             </div>
 
-            <div className="register__signin">
-              Already have an account?
-              <Link href="/login"> Sign in</Link>
+            <div className={styles.inputWrapper}>
+              <User size={18} />
+
+              <input
+                type="text"
+                placeholder="Last Name"
+                value={form.last_name}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+
+                    last_name: e.target.value,
+                  })
+                }
+                required
+              />
             </div>
           </div>
 
-          {/* ROLES */}
-          <div className="register__roles">
-            <div
-              className={`register__role ${
-                selectedRole === "parent" ? "register__role--active" : ""
-              }`}
-              onClick={() => setSelectedRole("parent")}
-            >
-              <div className="register__radio"></div>
+          <div className={styles.inputWrapper}>
+            <Mail size={18} />
 
-              <div className="register__role-icon">
-                <Users size={34} />
-              </div>
+            <input
+              type="email"
+              placeholder="Email Address"
+              value={form.email}
+              onChange={(e) =>
+                setForm({
+                  ...form,
 
-              <h3>Parent</h3>
-
-              <p>Register to manage your child&apos;s journey</p>
-            </div>
-
-            <div
-              className={`register__role ${
-                selectedRole === "coach" ? "register__role--active" : ""
-              }`}
-              onClick={() => setSelectedRole("coach")}
-            >
-              <div className="register__radio"></div>
-
-              <div className="register__role-icon">
-                <Dumbbell size={34} />
-              </div>
-
-              <h3>Coach</h3>
-
-              <p>Register as a coach or trainer</p>
-            </div>
+                  email: e.target.value,
+                })
+              }
+              required
+            />
           </div>
 
-          {/* FORM */}
-          <form className="register__form">
-            <div className="register__row">
-              <div className="register__field">
-                <label>First Name</label>
+          <div className={styles.inputWrapper}>
+            <Lock size={18} />
 
-                <input type="text" placeholder="Enter your first name" />
-              </div>
+            <input
+              type="password"
+              placeholder="Password"
+              value={form.password}
+              onChange={(e) =>
+                setForm({
+                  ...form,
 
-              <div className="register__field">
-                <label>Last Name</label>
+                  password: e.target.value,
+                })
+              }
+              required
+            />
+          </div>
 
-                <input type="text" placeholder="Enter your last name" />
-              </div>
-            </div>
+          <select
+            value={form.account_type}
+            onChange={(e) =>
+              setForm({
+                ...form,
 
-            <div className="register__field">
-              <label>Email Address</label>
+                account_type: e.target.value as AccountType,
+              })
+            }
+            className={styles.select}
+          >
+            <option value="PLAYER">PLAYER</option>
 
-              <div className="register__input">
-                <Mail size={18} />
+            <option value="PARENT">PARENT</option>
+          </select>
 
-                <input type="email" placeholder="Enter your email address" />
-              </div>
-            </div>
+          <button type="submit" disabled={loading} className={styles.submit}>
+            {loading ? "Creating Account..." : "Create Account"}
 
-            <div className="register__field">
-              <label>Phone Number</label>
+            <ArrowRight size={18} />
+          </button>
+        </form>
 
-              <div className="register__input">
-                <Phone size={18} />
-
-                <input type="text" placeholder="(123) 456-7890" />
-              </div>
-            </div>
-
-            {/* PARENT ONLY */}
-            {selectedRole === "parent" && (
-              <div className="register__field">
-                <label>Child Name</label>
-
-                <input type="text" placeholder="Enter your child's name" />
-              </div>
-            )}
-
-            {/* COACH ONLY */}
-            {selectedRole === "coach" && (
-              <div className="register__field">
-                <label>Coaching Experience</label>
-
-                <input type="text" placeholder="Years of coaching experience" />
-              </div>
-            )}
-
-            <div className="register__row">
-              <div className="register__field">
-                <label>Password</label>
-
-                <div className="register__input">
-                  <Lock size={18} />
-
-                  <input
-                    type="password"
-                    placeholder="Create a strong password"
-                  />
-
-                  <Eye size={18} />
-                </div>
-              </div>
-
-              <div className="register__field">
-                <label>Confirm Password</label>
-
-                <div className="register__input">
-                  <Lock size={18} />
-
-                  <input type="password" placeholder="Confirm your password" />
-
-                  <Eye size={18} />
-                </div>
-              </div>
-            </div>
-
-            <div className="register__terms">
-              <input type="checkbox" />
-
-              <p>
-                I agree to the
-                <span> Terms of Service </span>
-                and
-                <span> Privacy Policy</span>
-              </p>
-            </div>
-
-            <button type="submit" className="register__submit">
-              Create Account
-              <ArrowRight size={20} />
-            </button>
-
-            <div className="register__secure">
-              <ShieldCheck size={18} />
-
-              <p>Your information is secure and will never be shared.</p>
-            </div>
-          </form>
+        <div className={styles.bottom}>
+          Already have an account?
+          <Link href="/login">Login</Link>
         </div>
       </div>
     </section>

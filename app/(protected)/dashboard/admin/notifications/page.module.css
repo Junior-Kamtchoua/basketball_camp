@@ -1,0 +1,247 @@
+.container {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 32px;
+}
+
+.top {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 24px;
+
+  flex-wrap: wrap;
+}
+
+.top h1 {
+  font-size: 2.2rem;
+
+  font-weight: 800;
+
+  color: var(--heading-color);
+}
+
+.top p {
+  margin-top: 8px;
+
+  color: var(--text-secondary);
+}
+
+.stats {
+  display: flex;
+
+  gap: 20px;
+
+  flex-wrap: wrap;
+}
+
+.statCard {
+  min-width: 220px;
+
+  background: var(--card-bg);
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 24px;
+
+  padding: 22px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  box-shadow: var(--shadow);
+
+  transition: 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-8px);
+
+  border-color: var(--primary);
+}
+
+.statCard svg {
+  font-size: 1.8rem;
+
+  color: var(--primary);
+}
+
+.statCard h3 {
+  font-size: 1.6rem;
+
+  color: var(--heading-color);
+}
+
+.statCard p {
+  margin-top: 4px;
+
+  color: var(--text-secondary);
+}
+
+.grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+
+  gap: 24px;
+}
+
+.card {
+  position: relative;
+
+  background: var(--card-bg);
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 28px;
+
+  padding: 26px;
+
+  display: flex;
+
+  gap: 18px;
+
+  box-shadow: var(--shadow);
+
+  transition: 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+
+  border-color: var(--primary);
+
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+}
+
+.unread {
+  border-left: 5px solid var(--primary);
+}
+
+.icon {
+  width: 60px;
+
+  height: 60px;
+
+  border-radius: 18px;
+
+  background: rgba(37, 99, 235, 0.12);
+
+  color: var(--primary);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 1.4rem;
+
+  flex-shrink: 0;
+}
+
+.content {
+  flex: 1;
+}
+
+.header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 12px;
+}
+
+.header h2 {
+  font-size: 1.2rem;
+
+  color: var(--heading-color);
+}
+
+.badge {
+  background: var(--primary);
+
+  color: white;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 0.75rem;
+
+  font-weight: 700;
+}
+
+.content p {
+  line-height: 1.7;
+
+  color: var(--text-secondary);
+
+  margin-bottom: 18px;
+}
+
+.content small {
+  color: var(--text-secondary);
+}
+
+.empty {
+  min-height: 500px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  background: var(--card-bg);
+
+  border-radius: 32px;
+
+  border: 1px solid var(--border-color);
+
+  box-shadow: var(--shadow);
+}
+
+.empty svg {
+  font-size: 4rem;
+
+  color: var(--primary);
+
+  margin-bottom: 20px;
+}
+
+.empty h2 {
+  margin-bottom: 12px;
+
+  color: var(--heading-color);
+}
+
+.empty p {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .statCard {
+    width: 100%;
+  }
+}

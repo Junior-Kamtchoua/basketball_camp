@@ -1,0 +1,147 @@
+.container {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 24px;
+}
+
+.top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  flex-wrap: wrap;
+}
+
+.searchWrapper {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  background: var(--card-bg);
+
+  padding: 14px 16px;
+
+  border-radius: 16px;
+
+  border: 1px solid var(--border-color);
+
+  width: 340px;
+
+  max-width: 100%;
+}
+
+.searchWrapper input {
+  width: 100%;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  color: var(--text-color);
+}
+
+.list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+.card {
+  background: var(--card-bg);
+
+  border-radius: 22px;
+
+  padding: 20px;
+
+  border: 1px solid var(--border-color);
+
+  transition: 0.25s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+
+  border-color: #2563eb;
+}
+
+.mine {
+  border-left: 5px solid #2563eb;
+}
+
+.header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin-bottom: 14px;
+
+  flex-wrap: wrap;
+}
+
+.empty {
+  background: var(--card-bg);
+
+  border-radius: 24px;
+
+  padding: 60px 24px;
+
+  text-align: center;
+
+  border: 1px dashed var(--border-color);
+}
+
+.empty h2 {
+  margin-bottom: 10px;
+}
+
+.empty p {
+  color: #94a3b8;
+}
+
+.pagination {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 14px;
+
+  flex-wrap: wrap;
+}
+
+.pagination button {
+  border: none;
+
+  background: #2563eb;
+
+  color: white;
+
+  padding: 12px 18px;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}

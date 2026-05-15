@@ -1,6 +1,5 @@
 .footer {
   width: 100%;
-
   padding-top: 100px;
 
   background: #020817;
@@ -18,6 +17,7 @@
 .footer__top {
   display: flex;
   justify-content: space-between;
+
   gap: 5rem;
 
   padding-bottom: 4rem;
@@ -50,12 +50,14 @@
 
 .footer__links-wrapper {
   display: flex;
+
   gap: 5rem;
 }
 
 .footer__links {
   display: flex;
   flex-direction: column;
+
   gap: 1rem;
 
   min-width: 170px;
@@ -71,7 +73,8 @@
 }
 
 .footer__links a,
-.footer__links p {
+.footer__links p,
+.footer__whatsapp {
   width: fit-content;
 
   color: rgba(255, 255, 255, 0.72);
@@ -87,10 +90,12 @@
   content: "";
 
   position: absolute;
+
   left: 0;
   bottom: -4px;
 
   width: 0%;
+
   height: 2px;
 
   background: #3f5cff;
@@ -107,6 +112,44 @@
 .footer__links a:hover::after {
   width: 100%;
 }
+
+/* Contact section */
+
+.footer__contact {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  width: fit-content;
+}
+
+.footer__icon {
+  font-size: 18px;
+
+  flex-shrink: 0;
+
+  color: #3f5cff;
+}
+
+.whatsapp {
+  color: #25d366;
+}
+
+.footer__whatsapp {
+  text-decoration: none;
+}
+
+.footer__whatsapp:hover {
+  color: white;
+
+  transform: translateX(6px);
+}
+
+/* Bottom */
 
 .footer__bottom {
   padding: 2rem 0;
@@ -183,6 +226,7 @@
 
   .footer__bottom p {
     font-size: 0.85rem;
+
     line-height: 1.7;
   }
 }
@@ -197,6 +241,7 @@
   .footer__brand {
     display: flex;
     flex-direction: column;
+
     align-items: center;
   }
 
@@ -213,11 +258,17 @@
   }
 
   .footer__links a,
-  .footer__links p {
+  .footer__links p,
+  .footer__whatsapp {
     width: auto;
   }
 
-  .footer__links a:hover {
+  .footer__contact {
+    justify-content: center;
+  }
+
+  .footer__links a:hover,
+  .footer__whatsapp:hover {
     transform: none;
   }
 }

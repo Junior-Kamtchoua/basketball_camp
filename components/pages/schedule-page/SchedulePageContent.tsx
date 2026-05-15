@@ -1,4 +1,5 @@
 import { CalendarDays, Clock3, Trophy, Dumbbell } from "lucide-react";
+import "./SchedulePageContent.css";
 
 const schedule = [
   {
