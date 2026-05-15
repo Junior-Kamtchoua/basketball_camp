@@ -5,14 +5,14 @@ import Image from "next/image";
 import styles from "./AppPreviewSection.module.css";
 
 const previews = [
-  "/images/one.png",
-  "/images/two.png",
-  "/images/three.png",
-  "/images/four.png",
-  "/images/five.png",
-  "/images/six.png",
-  "/images/seven.png",
-  "/images/eight.png",
+  "/images/one.PNG",
+  "/images/two.PNG",
+  "/images/three.PNG",
+  "/images/four.PNG",
+  "/images/five.PNG",
+  "/images/six.PNG",
+  "/images/seven.PNG",
+  "/images/eight.PNG",
   "/images/nine.png",
   "/images/ten.png",
   "/images/eleven.png",
