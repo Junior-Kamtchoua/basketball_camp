@@ -5,18 +5,18 @@ import Image from "next/image";
 import styles from "./AppPreviewSection.module.css";
 
 const previews = [
-  "/images/1.png",
-  "/images/2.png",
-  "/images/3.png",
-  "/images/4.png",
-  "/images/5.png",
-  "/images/6.png",
-  "/images/7.png",
-  "/images/8.png",
-  "/images/9.png",
-  "/images/10.png",
-  "/images/11.png",
-  "/images/12.png",
+  "/images/one.png",
+  "/images/two.png",
+  "/images/three.png",
+  "/images/four.png",
+  "/images/five.png",
+  "/images/six.png",
+  "/images/seven.png",
+  "/images/eight.png",
+  "/images/nine.png",
+  "/images/ten.png",
+  "/images/eleven.png",
+  "/images/twelve.png",
 ];
 
 export default function AppPreviewSection() {
