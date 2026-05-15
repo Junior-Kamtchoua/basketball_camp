@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FileText,
   Download,
@@ -6,6 +8,7 @@ import {
   HeartPulse,
   Users,
 } from "lucide-react";
+
 import "./FormsPageContent.css";
 
 const forms = [
@@ -15,6 +18,7 @@ const forms = [
       "Complete the official academy registration process for new players.",
     icon: <ClipboardList size={28} />,
     file: "PDF Document",
+    pdf: "/file/form.pdf",
   },
   {
     title: "Medical Clearance Form",
@@ -22,6 +26,7 @@ const forms = [
       "Required health and medical information to ensure player safety.",
     icon: <HeartPulse size={28} />,
     file: "PDF Document",
+    pdf: "/file/form.pdf",
   },
   {
     title: "Parent Agreement Form",
@@ -29,10 +34,24 @@ const forms = [
       "Guidelines, responsibilities and academy policies for parents.",
     icon: <Users size={28} />,
     file: "PDF Document",
+    pdf: "/file/form.pdf",
   },
 ];
 
 export default function FormsPageContent() {
+  const handleDownload = (pdfPath: string, fileName: string) => {
+    const link = document.createElement("a");
+
+    link.href = pdfPath;
+    link.download = fileName;
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+  };
+
   return (
     <section className="page-section">
       <div className="page-container">
@@ -59,7 +78,9 @@ export default function FormsPageContent() {
 
               <p className="form-card__description">{form.description}</p>
 
-              <button>
+              <button
+                onClick={() => handleDownload(form.pdf, `${form.title}.pdf`)}
+              >
                 <Download size={18} />
                 Download PDF
               </button>

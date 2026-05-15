@@ -28,6 +28,8 @@ interface User {
   is_active: boolean;
 
   created_at: string;
+
+  basketball_registration_form_url?: string | null;
 }
 
 interface Props {
@@ -77,7 +79,15 @@ export default function UsersTable({ users }: Props) {
       </div>
 
       <Table
-        headers={["Name", "Email", "Role", "Status", "Created", "Actions"]}
+        headers={[
+          "Name",
+          "Email",
+          "Registration Form",
+          "Role",
+          "Status",
+          "Created",
+          "Actions",
+        ]}
       >
         {paginatedUsers.map((user) => (
           <tr key={user.id}>
@@ -86,6 +96,32 @@ export default function UsersTable({ users }: Props) {
             </td>
 
             <td>{user.email}</td>
+
+            <td>
+              {user.basketball_registration_form_url ? (
+                <div className={styles.documentActions}>
+                  <a
+                    href={user.basketball_registration_form_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.documentButton}
+                  >
+                    View
+                  </a>
+
+                  <a
+                    href={`${user.basketball_registration_form_url}?fl_attachment=true`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.downloadButton}
+                  >
+                    Download
+                  </a>
+                </div>
+              ) : (
+                <span className={styles.noDocument}>No Form</span>
+              )}
+            </td>
 
             <td>{user.role}</td>
 
@@ -97,7 +133,9 @@ export default function UsersTable({ users }: Props) {
               </span>
             </td>
 
-            <td>{new Date(user.created_at).toLocaleDateString()}</td>
+            <td suppressHydrationWarning>
+              {new Date(user.created_at).toLocaleDateString("en-GB")}
+            </td>
 
             <td className={styles.actions}>
               <EditUserButton user={user} />

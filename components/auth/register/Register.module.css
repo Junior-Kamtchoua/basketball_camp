@@ -175,6 +175,10 @@
   box-shadow: 0 0 0 4px rgba(63, 92, 255, 0.08);
 }
 
+.inputWrapper svg {
+  color: #667085;
+}
+
 .inputWrapper input {
   width: 100%;
 
@@ -187,6 +191,18 @@
   background: transparent;
 
   font-size: 1rem;
+
+  color: #111827 !important;
+
+  -webkit-text-fill-color: #111827;
+
+  caret-color: #111827;
+}
+
+.inputWrapper input::placeholder {
+  color: #6b7280;
+
+  opacity: 1;
 }
 
 .select {
@@ -201,6 +217,16 @@
   outline: none;
 
   font-size: 1rem;
+
+  background: white;
+
+  color: #111827;
+
+  font-weight: 600;
+}
+
+.select option {
+  color: #111827;
 }
 
 .submit {

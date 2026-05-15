@@ -7,7 +7,7 @@ import UserTable from "@/components/dashboard/user/tables/UserTable";
 import ZellePaymentCard from "@/components/dashboard/user/payments/ZellePaymentCard";
 
 import { getUserPayments } from "@/services/user-dashboard/getUserPayments";
-
+import RegistrationFormUpload from "@/components/dashboard/user/payments/RegistrationFormUpload";
 import styles from "./page.module.css";
 
 export default async function PaymentsPage() {
@@ -72,6 +72,8 @@ export default async function PaymentsPage() {
       </div>
 
       <ZellePaymentCard />
+
+      <RegistrationFormUpload />
 
       {payments.length === 0 ? (
         <div className={styles.empty}>

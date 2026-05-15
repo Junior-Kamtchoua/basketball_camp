@@ -79,3 +79,88 @@
 .container {
   color: var(--text-color);
 }
+
+.documentButton {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 8px 14px;
+
+  border-radius: 10px;
+
+  background: #2563eb;
+
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  transition: 0.2s;
+}
+
+.documentButton:hover {
+  background: #1d4ed8;
+}
+
+.noDocument {
+  color: #94a3b8;
+
+  font-size: 14px;
+}
+
+.documentActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.documentButton,
+.downloadButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 14px;
+
+  border-radius: 10px;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  transition: 0.2s ease;
+
+  cursor: pointer;
+}
+
+.documentButton {
+  background: #2563eb;
+  color: white;
+}
+
+.documentButton:hover {
+  background: #1d4ed8;
+}
+
+.downloadButton {
+  background: #f3f4f6;
+  color: #111827;
+  border: 1px solid #d1d5db;
+}
+
+.downloadButton:hover {
+  background: #e5e7eb;
+}
+
+.noDocument {
+  color: #94a3b8;
+  font-size: 14px;
+}

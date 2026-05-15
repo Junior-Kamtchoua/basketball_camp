@@ -13,12 +13,16 @@ export async function getUsersTable({ search = "" }: Props) {
       email,
       role,
       is_active,
-      created_at
+      created_at,
+      basketball_registration_form_url
+
     FROM users
+
     WHERE
       first_name ILIKE $1
       OR last_name ILIKE $1
       OR email ILIKE $1
+
     ORDER BY created_at DESC
   `;
 

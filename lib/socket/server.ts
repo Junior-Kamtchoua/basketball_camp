@@ -13,6 +13,8 @@ interface SendMessagePayload {
 
   attachment_url?: string | null;
 
+  audio_url?: string | null;
+
   created_at?: string;
 }
 
@@ -41,8 +43,8 @@ export function initializeSocket(server: HTTPServer) {
     console.log("Client connected:", socket.id);
 
     /*
-       USER JOIN
-      */
+     USER JOIN
+    */
 
     socket.on("join", (userId: string) => {
       onlineUsers.set(userId, socket.id);
@@ -51,8 +53,8 @@ export function initializeSocket(server: HTTPServer) {
     });
 
     /*
-       TYPING INDICATOR
-      */
+     TYPING INDICATOR
+    */
 
     socket.on("typing", (payload: TypingPayload) => {
       const receiverSocketId = onlineUsers.get(payload.receiverId);
@@ -65,8 +67,8 @@ export function initializeSocket(server: HTTPServer) {
     });
 
     /*
-       SEND MESSAGE
-      */
+     SEND MESSAGE
+    */
 
     socket.on("send-message", (message: SendMessagePayload) => {
       const receiverSocketId = onlineUsers.get(message.receiver_id);
@@ -82,15 +84,15 @@ export function initializeSocket(server: HTTPServer) {
       };
 
       /*
-           SEND TO RECEIVER
-          */
+         SEND TO RECEIVER
+        */
 
       if (receiverSocketId) {
         io?.to(receiverSocketId).emit("receive-message", messagePayload);
 
         /*
-             LIVE NOTIFICATION
-            */
+           LIVE NOTIFICATION
+          */
 
         io?.to(receiverSocketId).emit("chat-notification", {
           sender_id: message.sender_id,
@@ -100,15 +102,15 @@ export function initializeSocket(server: HTTPServer) {
       }
 
       /*
-           SEND BACK TO SENDER
-          */
+         SEND BACK TO SENDER
+        */
 
       socket.emit("message-sent", messagePayload);
     });
 
     /*
-       READ RECEIPTS
-      */
+     READ RECEIPTS
+    */
 
     socket.on("mark-read", (messageId: string) => {
       socket.emit("message-read", {
@@ -117,8 +119,16 @@ export function initializeSocket(server: HTTPServer) {
     });
 
     /*
-       DISCONNECT
-      */
+     CLEAR CHAT NOTIFICATIONS
+    */
+
+    socket.on("clear-chat-notifications", () => {
+      socket.emit("clear-chat-notifications");
+    });
+
+    /*
+     DISCONNECT
+    */
 
     socket.on("disconnect", () => {
       console.log("Client disconnected:", socket.id);

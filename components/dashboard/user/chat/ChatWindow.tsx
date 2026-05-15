@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-
 import { useEffect, useRef, useState } from "react";
 
 import { Send, Paperclip, Mic, Square } from "lucide-react";
@@ -48,6 +46,26 @@ export default function ChatWindow({
   const audioChunksRef = useRef<Blob[]>([]);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  /*
+   FILE HELPERS
+  */
+
+  function isImageFile(url: string) {
+    const lower = url.toLowerCase();
+
+    return (
+      lower.endsWith(".png") ||
+      lower.endsWith(".jpg") ||
+      lower.endsWith(".jpeg") ||
+      lower.endsWith(".gif") ||
+      lower.endsWith(".webp")
+    );
+  }
+
+  function isPdfFile(url: string) {
+    return url.toLowerCase().endsWith(".pdf");
+  }
 
   /*
    AUTO SCROLL
@@ -118,6 +136,38 @@ export default function ChatWindow({
   }, [socket, currentUserId, receiverId]);
 
   /*
+   MARK AS READ
+  */
+
+  useEffect(() => {
+    async function markMessagesAsRead() {
+      if (!receiverId) {
+        return;
+      }
+
+      try {
+        await fetch("/api/messages/mark-read", {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            senderId: receiverId,
+          }),
+        });
+
+        socket?.emit("clear-chat-notifications");
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    markMessagesAsRead();
+  }, [receiverId, socket]);
+
+  /*
    HANDLE TYPING
   */
 
@@ -178,6 +228,20 @@ export default function ChatWindow({
       return;
     }
 
+    const allowedTypes = [
+      "image/png",
+      "image/jpeg",
+      "image/jpg",
+      "image/webp",
+      "application/pdf",
+    ];
+
+    if (!allowedTypes.includes(file.type)) {
+      alert("Only images and PDF files are allowed.");
+
+      return;
+    }
+
     try {
       const formData = new FormData();
 
@@ -215,6 +279,16 @@ export default function ChatWindow({
     } catch (error) {
       console.error(error);
     }
+  }
+
+  /*
+   STOP RECORDING
+  */
+
+  function stopRecording() {
+    mediaRecorderRef.current?.stop();
+
+    setIsRecording(false);
   }
 
   /*
@@ -289,16 +363,6 @@ export default function ChatWindow({
     }
   }
 
-  /*
-   STOP RECORDING
-  */
-
-  function stopRecording() {
-    mediaRecorderRef.current?.stop();
-
-    setIsRecording(false);
-  }
-
   return (
     <>
       <div className={styles.chat}>
@@ -322,14 +386,65 @@ export default function ChatWindow({
                     {msg.content && <p>{msg.content}</p>}
 
                     {msg.attachment_url && (
-                      <Image
-                        src={msg.attachment_url}
-                        alt="Attachment"
-                        width={220}
-                        height={220}
-                        className={styles.attachment}
-                        onClick={() => setPreviewFile(msg.attachment_url || "")}
-                      />
+                      <>
+                        {isImageFile(msg.attachment_url) ? (
+                          <img
+                            src={msg.attachment_url}
+                            alt="Attachment"
+                            className={styles.attachment}
+                            onClick={() =>
+                              setPreviewFile(msg.attachment_url || "")
+                            }
+                          />
+                        ) : isPdfFile(msg.attachment_url) ? (
+                          <div className={styles.fileCard}>
+                            <div className={styles.fileIcon}>📄</div>
+
+                            <div className={styles.fileInfo}>
+                              <strong>PDF Document</strong>
+
+                              <span>Click below to open</span>
+                            </div>
+
+                            <div className={styles.fileActions}>
+                              <a
+                                href={msg.attachment_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.fileButton}
+                              >
+                                View
+                              </a>
+
+                              <a
+                                href={msg.attachment_url}
+                                download
+                                className={styles.downloadButton}
+                              >
+                                Download
+                              </a>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className={styles.fileCard}>
+                            <div className={styles.fileIcon}>📁</div>
+
+                            <div className={styles.fileInfo}>
+                              <strong>File</strong>
+
+                              <span>Download attachment</span>
+                            </div>
+
+                            <a
+                              href={msg.attachment_url}
+                              download
+                              className={styles.downloadButton}
+                            >
+                              Download
+                            </a>
+                          </div>
+                        )}
+                      </>
                     )}
 
                     {msg.audio_url && (
@@ -338,11 +453,11 @@ export default function ChatWindow({
                       </audio>
                     )}
 
-                    <small>
-                      {new Date(msg.created_at).toLocaleTimeString([], {
+                    <small suppressHydrationWarning>
+                      {new Date(msg.created_at).toLocaleTimeString("en-US", {
                         hour: "2-digit",
-
                         minute: "2-digit",
+                        hour12: true,
                       })}
                     </small>
                   </div>
@@ -400,7 +515,7 @@ export default function ChatWindow({
         </div>
       </div>
 
-      {previewFile && (
+      {previewFile && isImageFile(previewFile) && (
         <FilePreviewModal
           fileUrl={previewFile}
           onClose={() => setPreviewFile("")}

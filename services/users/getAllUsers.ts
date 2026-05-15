@@ -11,8 +11,11 @@ export async function getAllUsers() {
       avatar_url,
       is_active,
       is_verified,
-      created_at
+      created_at,
+      basketball_registration_form_url
+
     FROM users
+
     ORDER BY created_at DESC
   `;
 

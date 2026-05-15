@@ -8,6 +8,8 @@ import { usePathname } from "next/navigation";
 
 import { LogOut, X } from "lucide-react";
 
+import { useUnreadMessages } from "@/hooks/useUnreadMessages";
+
 import { sidebarLinks } from "./sidebarData";
 
 import styles from "./AdminSidebar.module.css";
@@ -18,12 +20,10 @@ interface Props {
   closeSidebar: () => void;
 }
 
-export default function AdminSidebar({
-  isOpen,
-
-  closeSidebar,
-}: Props) {
+export default function AdminSidebar({ isOpen, closeSidebar }: Props) {
   const pathname = usePathname();
+
+  const { count } = useUnreadMessages();
 
   async function handleLogout() {
     await fetch("/api/auth/logout", {
@@ -71,7 +71,15 @@ export default function AdminSidebar({
               >
                 <Icon size={20} />
 
-                <span>{link.title}</span>
+                <div className={styles.linkContent}>
+                  <span>{link.title}</span>
+
+                  {link.title === "Messages" && count > 0 && (
+                    <div className={styles.badge}>
+                      {count > 99 ? "99+" : count}
+                    </div>
+                  )}
+                </div>
               </Link>
             );
           })}

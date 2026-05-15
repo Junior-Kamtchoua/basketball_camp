@@ -1,51 +1,150 @@
 .overlay {
   position: fixed;
-
   inset: 0;
 
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.82);
+
+  z-index: 9999;
 
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
-  z-index: 300;
+  padding: 20px;
+
+  backdrop-filter: blur(8px);
 }
 
 .modal {
-  width: 90%;
+  width: 100%;
+  max-width: 1100px;
 
-  max-width: 800px;
+  height: 90vh;
 
   background: var(--card-bg);
 
   border-radius: 24px;
 
-  padding: 24px;
+  overflow: hidden;
 
-  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid var(--border-color);
 }
 
+.top {
+  height: 72px;
+
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  border-bottom: 1px solid var(--border-color);
+
+  background: var(--background);
+}
+
+.action,
 .close {
-  position: absolute;
-
-  top: 20px;
-
-  right: 20px;
+  width: 44px;
+  height: 44px;
 
   border: none;
 
-  background: transparent;
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #2563eb;
+
+  color: white;
 
   cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.action:hover,
+.close:hover {
+  transform: translateY(-2px);
+
+  background: #1d4ed8;
+}
+
+.content {
+  flex: 1;
+
+  overflow: hidden;
 }
 
 .image {
   width: 100%;
+  height: 100%;
 
-  border-radius: 18px;
+  object-fit: contain;
 
-  object-fit: cover;
+  background: black;
+}
+
+.pdf {
+  width: 100%;
+  height: 100%;
+
+  border: none;
+
+  background: white;
+}
+
+.unsupported {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 20px;
+
+  color: var(--text-color);
+}
+
+.unsupported a {
+  padding: 14px 22px;
+
+  border-radius: 14px;
+
+  background: #2563eb;
+
+  color: white;
+
+  text-decoration: none;
+
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .modal {
+    height: 95vh;
+
+    border-radius: 18px;
+  }
+
+  .top {
+    height: 64px;
+
+    padding: 0 14px;
+  }
+
+  .action,
+  .close {
+    width: 40px;
+    height: 40px;
+  }
 }

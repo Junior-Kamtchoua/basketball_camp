@@ -311,3 +311,56 @@
     min-width: 0;
   }
 }
+
+.pdfCard {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.pdfPreview {
+  width: 240px;
+  max-width: 100%;
+
+  height: 160px;
+
+  border-radius: 18px;
+
+  background: linear-gradient(135deg, #dc2626, #991b1b);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.pdfPreview:hover {
+  transform: scale(1.02);
+}
+
+.download {
+  text-decoration: none;
+
+  background: #2563eb;
+
+  color: white;
+
+  padding: 10px 14px;
+
+  border-radius: 12px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  width: fit-content;
+}
