@@ -5,18 +5,65 @@ import Image from "next/image";
 import styles from "./AppPreviewSection.module.css";
 
 const previews = [
-  "/images/one.PNG",
-  "/images/two.PNG",
-  "/images/three.PNG",
-  "/images/four.PNG",
-  "/images/five.PNG",
-  "/images/six.PNG",
-  "/images/seven.PNG",
-  "/images/eight.PNG",
-  "/images/nine.png",
-  "/images/ten.png",
-  "/images/eleven.png",
-  "/images/twelve.png",
+  {
+    image: "/images/one.PNG",
+    title: "Landing Page",
+  },
+
+  {
+    image: "/images/two.PNG",
+    title: "Forms Page - Download PDF",
+  },
+
+  {
+    image: "/images/three.PNG",
+    title: "Fill The Registration Form",
+  },
+
+  {
+    image: "/images/four.PNG",
+    title: "Resources",
+  },
+
+  {
+    image: "/images/five.PNG",
+    title: "Register",
+  },
+
+  {
+    image: "/images/six.PNG",
+    title: "Login",
+  },
+
+  {
+    image: "/images/seven.PNG",
+    title: "Messages",
+  },
+
+  {
+    image: "/images/eight.PNG",
+    title: "Messages",
+  },
+
+  {
+    image: "/images/nine.png",
+    title: "Payments",
+  },
+
+  {
+    image: "/images/ten.png",
+    title: "Payments",
+  },
+
+  {
+    image: "/images/eleven.png",
+    title: "Messages",
+  },
+
+  {
+    image: "/images/twelve.png",
+    title: "The End",
+  },
 ];
 
 export default function AppPreviewSection() {
@@ -36,12 +83,12 @@ export default function AppPreviewSection() {
         </div>
 
         <div className={styles.grid}>
-          {previews.map((image, index) => (
+          {previews.map((preview, index) => (
             <div key={index} className={styles.card}>
               <div className={styles.imageWrapper}>
                 <Image
-                  src={image}
-                  alt={`Preview ${index + 1}`}
+                  src={preview.image}
+                  alt={preview.title}
                   width={500}
                   height={900}
                   className={styles.image}
@@ -53,7 +100,7 @@ export default function AppPreviewSection() {
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
-                <p>Platform Preview</p>
+                <p>{preview.title}</p>
               </div>
             </div>
           ))}
