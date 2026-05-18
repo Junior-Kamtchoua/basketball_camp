@@ -3,13 +3,15 @@ import { NextRequest } from "next/server";
 import pool from "@/lib/db";
 
 interface Params {
-  params: {
+  params: Promise<{
     notificationId: string;
-  };
+  }>;
 }
 
 export async function POST(request: NextRequest, { params }: Params) {
   try {
+    const { notificationId } = await params;
+
     await pool.query(
       `
         UPDATE notifications
@@ -18,7 +20,7 @@ export async function POST(request: NextRequest, { params }: Params) {
 
         WHERE id = $1
       `,
-      [params.notificationId],
+      [notificationId],
     );
 
     return Response.json({
