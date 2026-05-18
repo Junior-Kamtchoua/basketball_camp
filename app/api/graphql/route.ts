@@ -8,17 +8,28 @@ import { typeDefs } from "@/graphql/typeDefs";
 
 import { resolvers } from "@/graphql/resolvers";
 
+import { getCurrentUser } from "@/lib/getCurrentUser";
+
 const server = new ApolloServer({
   typeDefs,
+
   resolvers,
 });
 
-const apolloHandler = startServerAndCreateNextHandler<NextRequest>(server);
+const handler = startServerAndCreateNextHandler(server, {
+  context: async () => {
+    const user = await getCurrentUser();
+
+    return {
+      user,
+    };
+  },
+});
 
 export async function GET(request: NextRequest) {
-  return apolloHandler(request);
+  return handler(request);
 }
 
 export async function POST(request: NextRequest) {
-  return apolloHandler(request);
+  return handler(request);
 }

@@ -289,3 +289,27 @@
     gap: 1rem;
   }
 }
+
+.availableSection {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2rem;
+}
+
+.availableTop h2 {
+  font-size: 2rem;
+
+  font-weight: 900;
+
+  color: var(--text-primary);
+
+  margin-bottom: 0.5rem;
+}
+
+.availableTop p {
+  color: var(--text-secondary);
+
+  line-height: 1.7;
+}

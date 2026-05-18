@@ -8,9 +8,14 @@ export const userMutationTypeDefs = `#graphql
     role: String!
   }
 
-  type Mutation {
-    createUser(input: CreateUserInput!): User!
-    deleteUser(id: ID!): Boolean!
+  extend type Mutation {
+    createUser(
+      input: CreateUserInput!
+    ): User!
+
+    deleteUser(
+      id: ID!
+    ): Boolean!
   }
 
 `;

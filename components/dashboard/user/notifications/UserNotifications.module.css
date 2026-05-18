@@ -277,3 +277,29 @@
     grid-template-columns: 1fr;
   }
 }
+
+.time {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+.readButton {
+  border: none;
+
+  background: #2563eb;
+
+  color: white;
+
+  padding: 8px 12px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-size: 0.82rem;
+
+  font-weight: 700;
+}

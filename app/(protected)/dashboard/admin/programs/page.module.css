@@ -3,17 +3,55 @@
 
   flex-direction: column;
 
-  gap: 24px;
+  gap: 32px;
+
+  animation: fadeIn 0.35s ease;
+}
+
+.top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
 }
 
 .top h1 {
-  font-size: 2rem;
+  font-size: 2.4rem;
 
-  font-weight: 700;
+  font-weight: 800;
+
+  letter-spacing: -1px;
+
+  margin-bottom: 10px;
+
+  background: linear-gradient(90deg, #111827, #2563eb);
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
 }
 
 .top p {
-  margin-top: 8px;
-
   color: var(--text-secondary);
+
+  font-size: 1rem;
+
+  line-height: 1.7;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
 }

@@ -3,11 +3,18 @@ import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 
 import UserTable from "@/components/dashboard/user/tables/UserTable";
+import PaymentsAutoRefresh from "@/components/dashboard/user/payments/PaymentsAutoRefresh";
 
 import ZellePaymentCard from "@/components/dashboard/user/payments/ZellePaymentCard";
 
-import { getUserPayments } from "@/services/user-dashboard/getUserPayments";
+import UploadPaymentProof from "@/components/dashboard/user/payments/UploadPaymentProof";
+
 import RegistrationFormUpload from "@/components/dashboard/user/payments/RegistrationFormUpload";
+
+import { getUserPayments } from "@/services/user-dashboard/getUserPayments";
+
+import { getUserPrograms } from "@/services/user-dashboard/getUserPrograms";
+
 import styles from "./page.module.css";
 
 export default async function PaymentsPage() {
@@ -17,7 +24,11 @@ export default async function PaymentsPage() {
     redirect("/login");
   }
 
-  const payments = await getUserPayments(user.id);
+  const [payments, programs] = await Promise.all([
+    getUserPayments(user.id),
+
+    getUserPrograms(user.id),
+  ]);
 
   const totalPaid = payments.reduce(
     (acc, payment) => acc + Number(payment.amount),
@@ -34,6 +45,7 @@ export default async function PaymentsPage() {
 
   return (
     <div className={styles.container}>
+      <PaymentsAutoRefresh />
       <div className={styles.hero}>
         <div>
           <h1>Payments Dashboard</h1>
@@ -73,6 +85,8 @@ export default async function PaymentsPage() {
 
       <ZellePaymentCard />
 
+      <UploadPaymentProof programs={programs} />
+
       <RegistrationFormUpload />
 
       {payments.length === 0 ? (
@@ -92,14 +106,18 @@ export default async function PaymentsPage() {
               <td>
                 <span
                   className={`${styles.status} ${
-                    payment.status === "PAID" ? styles.paid : styles.pending
+                    payment.status === "PAID"
+                      ? styles.paid
+                      : payment.status === "REJECTED"
+                        ? styles.rejected
+                        : styles.pending
                   }`}
                 >
                   {payment.status}
                 </span>
               </td>
 
-              <td>{payment.payment_method || "N/A"}</td>
+              <td>{payment.payment_method || "ZELLE"}</td>
 
               <td>{new Date(payment.created_at).toLocaleDateString()}</td>
             </tr>

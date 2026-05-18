@@ -12,4 +12,8 @@ export const userTypeDefs = `#graphql
     created_at: String!
   }
 
+  extend type Query {
+    users: [User!]!
+  }
+
 `;

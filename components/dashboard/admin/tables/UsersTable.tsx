@@ -30,6 +30,10 @@ interface User {
   created_at: string;
 
   basketball_registration_form_url?: string | null;
+
+  team_id?: string | null;
+
+  team_name?: string | null;
 }
 
 interface Props {
@@ -83,6 +87,7 @@ export default function UsersTable({ users }: Props) {
           "Name",
           "Email",
           "Registration Form",
+          "Team",
           "Role",
           "Status",
           "Created",
@@ -122,6 +127,8 @@ export default function UsersTable({ users }: Props) {
                 <span className={styles.noDocument}>No Form</span>
               )}
             </td>
+
+            <td>{user.team_name || "No Team"}</td>
 
             <td>{user.role}</td>
 

@@ -5,7 +5,6 @@ import {
   Download,
   ShieldCheck,
   ClipboardList,
-  HeartPulse,
   Users,
 } from "lucide-react";
 
@@ -13,36 +12,42 @@ import "./FormsPageContent.css";
 
 const forms = [
   {
-    title: "Player Registration Form",
+    title: "Basketball Camp Registration Form",
+
     description:
-      "Complete the official academy registration process for new players.",
+      "Download the official basketball camp registration form required for player enrollment and participation.",
+
     icon: <ClipboardList size={28} />,
+
     file: "PDF Document",
-    pdf: "/file/form.pdf",
+
+    pdf: "/file/Basketball_Camp_Registration_Form.pdf",
   },
+
   {
-    title: "Medical Clearance Form",
+    title: "Basketball Club Registration Form",
+
     description:
-      "Required health and medical information to ensure player safety.",
-    icon: <HeartPulse size={28} />,
-    file: "PDF Document",
-    pdf: "/file/form.pdf",
-  },
-  {
-    title: "Parent Agreement Form",
-    description:
-      "Guidelines, responsibilities and academy policies for parents.",
+      "Download the official basketball club registration form for academy membership and player registration.",
+
     icon: <Users size={28} />,
+
     file: "PDF Document",
-    pdf: "/file/form.pdf",
+
+    pdf: "/file/Basketball_Club_Registration_Form.pdf",
   },
 ];
 
 export default function FormsPageContent() {
-  const handleDownload = (pdfPath: string, fileName: string) => {
+  const handleDownload = (
+    pdfPath: string,
+
+    fileName: string,
+  ) => {
     const link = document.createElement("a");
 
     link.href = pdfPath;
+
     link.download = fileName;
 
     document.body.appendChild(link);
@@ -61,8 +66,8 @@ export default function FormsPageContent() {
           <h2 className="page-title">Academy Forms & Resources</h2>
 
           <p className="page-text page-text--center">
-            Access all important registration documents, agreements and academy
-            forms required for participation in Friendship Basketball Academy
+            Access all important registration documents and academy forms
+            required for participation in Friendship Basketball Academy
             programs.
           </p>
         </div>
@@ -79,7 +84,13 @@ export default function FormsPageContent() {
               <p className="form-card__description">{form.description}</p>
 
               <button
-                onClick={() => handleDownload(form.pdf, `${form.title}.pdf`)}
+                onClick={() =>
+                  handleDownload(
+                    form.pdf,
+
+                    `${form.title}.pdf`,
+                  )
+                }
               >
                 <Download size={18} />
                 Download PDF

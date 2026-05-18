@@ -2,12 +2,18 @@ import CreateProgramForm from "@/components/dashboard/admin/forms/CreateProgramF
 
 import ProgramsTable from "@/components/dashboard/admin/tables/ProgramsTable";
 
+import ProgramApplicationsTable from "@/components/dashboard/admin/tables/ProgramApplicationsTable";
+
 import { getPrograms } from "@/services/programs/getPrograms";
+
+import { getProgramApplications } from "@/services/programs/getProgramApplications";
 
 import styles from "./page.module.css";
 
 export default async function ProgramsPage() {
   const programs = await getPrograms();
+
+  const applications = await getProgramApplications();
 
   return (
     <div className={styles.container}>
@@ -22,6 +28,8 @@ export default async function ProgramsPage() {
       <CreateProgramForm />
 
       <ProgramsTable programs={programs} />
+
+      <ProgramApplicationsTable applications={applications} />
     </div>
   );
 }

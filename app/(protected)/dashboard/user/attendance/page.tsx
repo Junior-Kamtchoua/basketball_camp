@@ -1,10 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { CalendarCheck, CheckCircle2, XCircle, TrendingUp } from "lucide-react";
-
 import { getCurrentUser } from "@/lib/getCurrentUser";
-
-import UserTable from "@/components/dashboard/user/tables/UserTable";
 
 import { getUserAttendance } from "@/services/user-dashboard/getUserAttendance";
 
@@ -28,99 +24,62 @@ export default async function AttendancePage() {
   ).length;
 
   const attendanceRate =
-    attendance.length > 0
-      ? Math.round((presentCount / attendance.length) * 100)
-      : 0;
+    attendance.length === 0
+      ? 0
+      : Math.round((presentCount / attendance.length) * 100);
 
   return (
     <div className={styles.container}>
       <div className={styles.hero}>
-        <div>
-          <h1>Attendance Overview</h1>
+        <h1>Attendance Dashboard</h1>
 
-          <p>
-            Track your academy participation, training consistency and overall
-            attendance performance across all sessions.
-          </p>
-        </div>
+        <p>Track your training attendance and academy consistency.</p>
       </div>
 
       <div className={styles.statsGrid}>
         <div className={styles.card}>
-          <div className={styles.iconBlue}>
-            <CalendarCheck size={24} />
-          </div>
+          <h2>{attendanceRate}%</h2>
 
-          <div>
-            <h3>{attendance.length}</h3>
-
-            <p>Total Sessions</p>
-          </div>
+          <p>Attendance Rate</p>
         </div>
 
         <div className={styles.card}>
-          <div className={styles.iconGreen}>
-            <CheckCircle2 size={24} />
-          </div>
+          <h2>{presentCount}</h2>
 
-          <div>
-            <h3>{presentCount}</h3>
-
-            <p>Present</p>
-          </div>
+          <p>Present</p>
         </div>
 
         <div className={styles.card}>
-          <div className={styles.iconRed}>
-            <XCircle size={24} />
-          </div>
+          <h2>{absentCount}</h2>
 
-          <div>
-            <h3>{absentCount}</h3>
-
-            <p>Absent</p>
-          </div>
+          <p>Absent</p>
         </div>
 
         <div className={styles.card}>
-          <div className={styles.iconPurple}>
-            <TrendingUp size={24} />
-          </div>
+          <h2>{attendance.length}</h2>
 
-          <div>
-            <h3>{attendanceRate}%</h3>
-
-            <p>Attendance Rate</p>
-          </div>
+          <p>Total Sessions</p>
         </div>
       </div>
 
-      <div className={styles.tableSection}>
-        <div className={styles.tableTop}>
-          <h2>Attendance History</h2>
+      <div className={styles.list}>
+        {attendance.map((item) => (
+          <div key={item.id} className={styles.eventCard}>
+            <div>
+              <h3>{item.title}</h3>
 
-          <span>{attendance.length} records</span>
-        </div>
+              <p>{new Date(item.start_time).toLocaleString()}</p>
+            </div>
 
-        <UserTable headers={["Date", "Status"]}>
-          {attendance.map((item) => (
-            <tr key={item.id}>
-              <td>{new Date(item.attendance_date).toLocaleDateString()}</td>
-
-              <td>
-                <span
-                  className={`${styles.badge} ${
-                    item.status === "PRESENT"
-                      ? styles.presentBadge
-                      : styles.absentBadge
-                  }`}
-                >
-                  {item.status}
-                </span>
-              </td>
-            </tr>
-          ))}
-        </UserTable>
+            <span
+              className={`${styles.badge} ${
+                item.status === "PRESENT" ? styles.present : styles.absent
+              }`}
+            >
+              {item.status}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );

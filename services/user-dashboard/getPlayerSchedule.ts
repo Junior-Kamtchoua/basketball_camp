@@ -26,7 +26,7 @@ export async function getPlayerSchedule(
   userId: string,
 ): Promise<PlayerSchedule[]> {
   /*
-   GET PLAYER + TEAM
+    GET PLAYER + TEAM
   */
 
   const playerQuery = await pool.query(
@@ -47,7 +47,7 @@ export async function getPlayerSchedule(
   const player = playerQuery.rows[0];
 
   /*
-   NO PLAYER
+    NO PLAYER
   */
 
   if (!player) {
@@ -55,7 +55,15 @@ export async function getPlayerSchedule(
   }
 
   /*
-   GET REAL SCHEDULE
+    NO TEAM
+  */
+
+  if (!player.team_id) {
+    return [];
+  }
+
+  /*
+    GET REAL SCHEDULE
   */
 
   const query = `
@@ -92,7 +100,7 @@ export async function getPlayerSchedule(
     FROM events
 
     LEFT JOIN teams
-      ON teams.id = $2
+      ON teams.id = events.team_id
 
     LEFT JOIN coaches
       ON coaches.id = teams.coach_id
@@ -100,12 +108,14 @@ export async function getPlayerSchedule(
     LEFT JOIN users
       ON users.id = coaches.user_id
 
+    WHERE events.team_id = $1
+
     ORDER BY events.start_time ASC
 
     LIMIT 15
   `;
 
-  const result = await pool.query(query, [userId, player.team_id]);
+  const result = await pool.query(query, [player.team_id]);
 
   const now = new Date();
 

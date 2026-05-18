@@ -4,10 +4,14 @@ import TeamsTable from "@/components/dashboard/admin/tables/TeamsTable";
 
 import { getTeams } from "@/services/teams/getTeams";
 
+import { getPlayersWithoutTeam } from "@/services/players/getPlayersWithoutTeam";
+
 import styles from "./page.module.css";
 
 export default async function TeamsPage() {
   const teams = await getTeams();
+
+  const availablePlayers = await getPlayersWithoutTeam();
 
   return (
     <div className={styles.container}>
@@ -21,7 +25,7 @@ export default async function TeamsPage() {
 
       <CreateTeamForm />
 
-      <TeamsTable teams={teams} />
+      <TeamsTable teams={teams} availablePlayers={availablePlayers} />
     </div>
   );
 }

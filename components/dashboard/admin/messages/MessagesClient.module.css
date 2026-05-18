@@ -5,7 +5,9 @@
 
   gap: 24px;
 
-  min-height: 760px;
+  height: calc(100vh - 140px);
+
+  overflow: hidden;
 }
 
 .sidebar {
@@ -20,12 +22,16 @@
   display: flex;
 
   flex-direction: column;
+
+  min-height: 0;
 }
 
 .sidebarHeader {
   padding: 24px;
 
   border-bottom: 1px solid var(--border-color);
+
+  flex-shrink: 0;
 }
 
 .sidebarHeader h2 {
@@ -35,6 +41,8 @@
 }
 
 .userButton {
+  position: relative;
+
   border: none;
 
   background: transparent;
@@ -64,6 +72,30 @@
   background: rgba(37, 99, 235, 0.12);
 }
 
+.unread {
+  background: rgba(37, 99, 235, 0.08);
+}
+
+.unread::after {
+  content: "";
+
+  position: absolute;
+
+  top: 24px;
+  right: 20px;
+
+  width: 12px;
+  height: 12px;
+
+  border-radius: 50%;
+
+  background: #10b981;
+
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.7);
+
+  animation: pulse 1.2s infinite;
+}
+
 .avatar {
   font-size: 3.2rem;
 
@@ -74,18 +106,22 @@
 
 .userContent {
   overflow: hidden;
+
+  flex: 1;
 }
 
 .userContent h3 {
   margin-bottom: 6px;
 
   font-size: 15px;
+
+  color: var(--heading-color);
 }
 
 .userContent p {
   font-size: 14px;
 
-  opacity: 0.7;
+  color: var(--text-secondary);
 
   overflow: hidden;
 
@@ -106,10 +142,14 @@
   flex-direction: column;
 
   overflow: hidden;
+
+  min-height: 0;
 }
 
 .messages {
   flex: 1;
+
+  min-height: 0;
 
   padding: 24px;
 
@@ -163,6 +203,10 @@
 
 .received .messageBubble {
   background: rgba(37, 99, 235, 0.08);
+
+  color: var(--text-color);
+
+  border: 1px solid var(--border-color);
 }
 
 .messageBubble span {
@@ -183,6 +227,10 @@
   padding: 18px;
 
   border-top: 1px solid var(--border-color);
+
+  background: var(--card-bg);
+
+  flex-shrink: 0;
 }
 
 .form input {
@@ -209,7 +257,6 @@
 .sendButton,
 .recording {
   width: 58px;
-
   height: 58px;
 
   border-radius: 18px;
@@ -231,83 +278,15 @@
   flex-shrink: 0;
 }
 
-.iconButton svg,
-.sendButton svg,
-.recording svg {
-  font-size: 1.35rem;
-}
-
 .iconButton,
 .sendButton {
   background: #2563eb;
-}
-
-.iconButton:hover,
-.sendButton:hover {
-  background: #1d4ed8;
-
-  transform: translateY(-2px);
 }
 
 .recording {
   background: #ef4444;
 
   animation: pulse 1s infinite;
-}
-
-.attachment {
-  width: 220px;
-
-  max-width: 100%;
-
-  border-radius: 16px;
-
-  cursor: pointer;
-}
-
-.audio {
-  width: 240px;
-
-  max-width: 100%;
-}
-
-.previewOverlay {
-  position: fixed;
-
-  inset: 0;
-
-  background: rgba(0, 0, 0, 0.75);
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  z-index: 9999;
-
-  padding: 20px;
-}
-
-.previewImage {
-  width: auto;
-
-  height: auto;
-
-  max-width: 90vw;
-
-  max-height: 90vh;
-
-  border-radius: 20px;
-}
-
-.empty,
-.noMessages {
-  margin: auto;
-
-  opacity: 0.7;
-
-  text-align: center;
 }
 
 @keyframes pulse {
@@ -324,17 +303,61 @@
   }
 }
 
-@media (max-width: 1100px) {
+.countBadge {
+  position: absolute;
+
+  top: 18px;
+  right: 18px;
+
+  min-width: 22px;
+  height: 22px;
+
+  padding: 0 6px;
+
+  border-radius: 999px;
+
+  background: #ef4444;
+
+  color: white;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
   .layout {
     grid-template-columns: 1fr;
+
+    height: auto;
+
+    overflow: visible;
   }
 
   .sidebar {
+    min-height: auto;
+
     max-height: 320px;
   }
-}
 
-@media (max-width: 700px) {
+  .chatArea {
+    height: calc(100vh - 220px);
+
+    min-height: 500px;
+  }
+
   .messages {
     padding: 16px;
   }
@@ -342,30 +365,66 @@
   .messageBubble {
     max-width: 92%;
   }
+}
+
+@media (max-width: 600px) {
+  .layout {
+    gap: 16px;
+  }
+
+  .sidebarHeader {
+    padding: 18px;
+  }
+
+  .sidebarHeader h2 {
+    font-size: 1.25rem;
+  }
+
+  .userButton {
+    padding: 14px;
+  }
+
+  .avatar {
+    font-size: 2.6rem;
+  }
+
+  .chatArea {
+    border-radius: 22px;
+
+    height: calc(100vh - 180px);
+  }
+
+  .messages {
+    gap: 14px;
+
+    padding: 14px;
+  }
+
+  .messageBubble {
+    max-width: 100%;
+
+    padding: 14px;
+  }
 
   .form {
-    padding: 14px;
+    padding: 12px;
 
     gap: 8px;
+  }
+
+  .form input {
+    height: 48px;
+
+    font-size: 14px;
   }
 
   .iconButton,
   .sendButton,
   .recording {
-    width: 52px;
+    width: 1.5rem;
 
-    height: 52px;
-  }
+    height: 48px;
 
-  .iconButton svg,
-  .sendButton svg,
-  .recording svg {
-    font-size: 1.15rem;
-  }
-
-  .form input {
-    height: 50px;
-
-    font-size: 14px;
+    border-radius: 14px;
   }
 }

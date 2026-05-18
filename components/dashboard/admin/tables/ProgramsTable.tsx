@@ -47,11 +47,13 @@ export default function ProgramsTable({ programs }: Props) {
             <tr key={program.id}>
               <td>{program.title}</td>
 
-              <td>${program.price}</td>
+              <td>${Number(program.price).toLocaleString("en-US")}</td>
 
               <td>{program.duration_weeks} weeks</td>
 
-              <td>{new Date(program.created_at).toLocaleDateString()}</td>
+              <td suppressHydrationWarning>
+                {new Date(program.created_at).toLocaleDateString("en-US")}
+              </td>
             </tr>
           ))}
         </Table>

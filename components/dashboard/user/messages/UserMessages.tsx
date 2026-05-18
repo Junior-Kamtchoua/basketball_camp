@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { Search } from "lucide-react";
+
+import { useSocket } from "@/context/SocketContext";
 
 import { Message } from "@/types/message";
 
@@ -17,12 +19,52 @@ interface Props {
 const ITEMS_PER_PAGE = 8;
 
 export default function UserMessages({ currentUserId, messages }: Props) {
+  const { socket } = useSocket();
+
   const [search, setSearch] = useState("");
 
   const [page, setPage] = useState(1);
 
+  const [liveMessages, setLiveMessages] = useState<Message[]>(messages);
+
+  /*
+    REALTIME MESSAGES
+  */
+
+  useEffect(() => {
+    function handleReceiveMessage(message: Message) {
+      const belongsToUser =
+        message.sender_id === currentUserId ||
+        message.receiver_id === currentUserId;
+
+      if (!belongsToUser) {
+        return;
+      }
+
+      setLiveMessages((prev) => {
+        const exists = prev.some((item) => item.id === message.id);
+
+        if (exists) {
+          return prev;
+        }
+
+        return [message, ...prev];
+      });
+    }
+
+    socket.on("receive-message", handleReceiveMessage);
+
+    return () => {
+      socket.off("receive-message", handleReceiveMessage);
+    };
+  }, [socket, currentUserId]);
+
+  /*
+    FILTERED
+  */
+
   const filteredMessages = useMemo(() => {
-    return messages.filter((message) => {
+    return liveMessages.filter((message) => {
       const targetName =
         message.sender_id === currentUserId
           ? message.receiver_name
@@ -33,7 +75,11 @@ export default function UserMessages({ currentUserId, messages }: Props) {
         message.content.toLowerCase().includes(search.toLowerCase())
       );
     });
-  }, [messages, search, currentUserId]);
+  }, [liveMessages, search, currentUserId]);
+
+  /*
+    PAGINATION
+  */
 
   const totalPages = Math.ceil(filteredMessages.length / ITEMS_PER_PAGE);
 

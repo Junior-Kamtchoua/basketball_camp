@@ -56,6 +56,14 @@ export const sidebarLinks: SidebarLink[] = [
   },
 
   {
+    title: "Schedule",
+
+    href: "/dashboard/admin/schedule",
+
+    icon: FaCalendarAlt,
+  },
+
+  {
     title: "Payments",
 
     href: "/dashboard/admin/payments",

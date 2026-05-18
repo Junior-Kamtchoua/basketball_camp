@@ -15,5 +15,7 @@ export interface ActivityLog {
 
   action: string;
 
+  type: string;
+
   created_at: string;
 }

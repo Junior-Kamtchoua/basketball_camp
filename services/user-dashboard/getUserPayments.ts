@@ -4,58 +4,79 @@ import { Payment } from "@/types/payment";
 
 export async function getUserPayments(userId: string): Promise<Payment[]> {
   /*
-   GET PLAYER ID
+    GET PLAYER ID
   */
 
   const playerQuery = await pool.query(
     `
-        SELECT id
+      SELECT id
 
-        FROM players
+      FROM players
 
-        WHERE user_id = $1
+      WHERE user_id = $1
 
-        LIMIT 1
-      `,
+      LIMIT 1
+    `,
     [userId],
   );
 
-  const player = playerQuery.rows[0];
+  const player = playerQuery.rows[0] as
+    | {
+        id: string;
+      }
+    | undefined;
 
   /*
-   NO PLAYER
+    NO PLAYER
   */
 
   if (!player) {
     return [];
   }
 
-  const playerId: string = player.id;
-
   /*
-   GET PAYMENTS
+    GET PAYMENTS
   */
 
   const query = `
     SELECT
-      id,
+      payments.id,
 
-      amount,
+      payments.player_program_id,
 
-      status,
+      payments.amount,
 
-      payment_method,
+      payments.status,
 
-      created_at
+      payments.payment_method,
+
+      payments.payment_proof_url,
+
+      payments.transaction_id,
+
+      payments.created_at,
+
+      payments.paid_at,
+
+      programs.title
+        AS program_title
 
     FROM payments
 
-    WHERE player_id = $1
+    LEFT JOIN player_programs
+      ON player_programs.id =
+      payments.player_program_id
 
-    ORDER BY created_at DESC
+    LEFT JOIN programs
+      ON programs.id =
+      player_programs.program_id
+
+    WHERE payments.player_id = $1
+
+    ORDER BY payments.created_at DESC
   `;
 
-  const result = await pool.query(query, [playerId]);
+  const result = await pool.query(query, [player.id]);
 
   return result.rows as Payment[];
 }

@@ -34,14 +34,14 @@ export async function registerUser({
 
   const existingUser = await pool.query(
     `
-        SELECT id
+      SELECT id
 
-        FROM users
+      FROM users
 
-        WHERE email = $1
+      WHERE email = $1
 
-        LIMIT 1
-      `,
+      LIMIT 1
+    `,
     [normalizedEmail],
   );
 
@@ -50,6 +50,10 @@ export async function registerUser({
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
+
+  /*
+    CREATE USER
+  */
 
   const query = `
     INSERT INTO users (
@@ -92,5 +96,26 @@ export async function registerUser({
 
   const result = await pool.query(query, values);
 
-  return result.rows[0];
+  const user = result.rows[0];
+
+  /*
+    CREATE PLAYER PROFILE
+  */
+
+  await pool.query(
+    `
+      INSERT INTO players (
+        user_id,
+        joined_at
+      )
+
+      VALUES (
+        $1,
+        NOW()
+      )
+    `,
+    [user.id],
+  );
+
+  return user;
 }

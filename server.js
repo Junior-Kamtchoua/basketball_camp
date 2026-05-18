@@ -51,7 +51,29 @@ app.prepare().then(() => {
       */
 
     socket.on("send-message", (message) => {
+      /*
+        REALTIME MESSAGE
+      */
+
       io.emit("receive-message", message);
+
+      /*
+        RECEIVER NOTIFICATION
+      */
+
+      const receiverSocketId = onlineUsers.get(message.receiver_id);
+
+      if (receiverSocketId) {
+        io.to(receiverSocketId).emit("chat-notification");
+      }
+    });
+
+    /*
+      CLEAR CHAT NOTIFICATIONS
+    */
+
+    socket.on("clear-chat-notifications", () => {
+      io.emit("clear-chat-notifications");
     });
 
     /*

@@ -7,15 +7,17 @@ export async function getActivityLogs(): Promise<ActivityLog[]> {
     SELECT
       id,
 
-      message AS action,
+      action,
+
+      type,
 
       created_at
 
-    FROM notifications
+    FROM activity_logs
 
     ORDER BY created_at DESC
 
-    LIMIT 10
+    LIMIT 12
   `;
 
   const result = await pool.query(query);
@@ -24,6 +26,8 @@ export async function getActivityLogs(): Promise<ActivityLog[]> {
     id: row.id,
 
     action: row.action,
+
+    type: row.type,
 
     created_at: row.created_at,
   }));

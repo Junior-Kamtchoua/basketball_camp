@@ -8,4 +8,8 @@ export const dashboardTypeDefs = `#graphql
     totalRevenue: Float!
   }
 
+  extend type Query {
+    dashboardStats: DashboardStats!
+  }
+
 `;

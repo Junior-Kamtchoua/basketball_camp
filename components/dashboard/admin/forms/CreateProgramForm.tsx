@@ -16,6 +16,8 @@ interface FormData {
   price: string;
 
   duration_weeks: string;
+
+  max_players: string;
 }
 
 export default function CreateProgramForm() {
@@ -31,6 +33,8 @@ export default function CreateProgramForm() {
     price: "",
 
     duration_weeks: "",
+
+    max_players: "",
   });
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -48,16 +52,16 @@ export default function CreateProgramForm() {
 
         body: JSON.stringify({
           query: `
-                  mutation CreateProgram(
-                    $input: CreateProgramInput!
-                  ) {
-                    createProgram(
-                      input: $input
-                    ) {
-                      id
-                    }
-                  }
-                `,
+            mutation CreateProgram(
+              $input: CreateProgramInput!
+            ) {
+              createProgram(
+                input: $input
+              ) {
+                id
+              }
+            }
+          `,
 
           variables: {
             input: {
@@ -68,12 +72,16 @@ export default function CreateProgramForm() {
               price: Number(form.price),
 
               duration_weeks: Number(form.duration_weeks),
+
+              max_players: Number(form.max_players),
             },
           },
         }),
       });
 
       const result = await response.json();
+
+      console.log(result);
 
       if (result.errors) {
         throw new Error(result.errors[0].message);
@@ -91,6 +99,8 @@ export default function CreateProgramForm() {
         price: "",
 
         duration_weeks: "",
+
+        max_players: "",
       });
     } catch {
       toast.error("Failed to create program");
@@ -136,6 +146,19 @@ export default function CreateProgramForm() {
             ...form,
 
             duration_weeks: e.target.value,
+          })
+        }
+      />
+
+      <input
+        type="number"
+        placeholder="Max players"
+        value={form.max_players}
+        onChange={(e) =>
+          setForm({
+            ...form,
+
+            max_players: e.target.value,
           })
         }
       />

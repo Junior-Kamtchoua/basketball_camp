@@ -71,6 +71,10 @@ export default function MessagesClient({ currentUserId }: Props) {
 
   const [isRecording, setIsRecording] = useState(false);
 
+  const [unreadUsers, setUnreadUsers] = useState<string[]>([]);
+
+  const [unreadCounts, setUnreadCounts] = useState<Record<string, number>>({});
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -150,7 +154,48 @@ export default function MessagesClient({ currentUserId }: Props) {
 
   async function handleSelectUser(userId: string) {
     try {
+      /*
+      SET ACTIVE USER
+    */
+
       setActiveUser(userId);
+
+      /*
+      MARK MESSAGES AS READ
+    */
+
+      await fetch("/api/messages/mark-read", {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          senderId: userId,
+        }),
+      });
+
+      /*
+      CLEAR LOCAL BADGE
+    */
+
+      setUnreadUsers((prev) => prev.filter((item) => item !== userId));
+      setUnreadCounts((prev) => ({
+        ...prev,
+
+        [userId]: 0,
+      }));
+
+      /*
+      CLEAR SIDEBAR NOTIFICATIONS
+    */
+
+      socket.emit("clear-chat-notifications");
+
+      /*
+      LOAD CONVERSATION
+    */
 
       const response = await fetch(`/api/messages/conversations/${userId}`, {
         cache: "no-store",
@@ -196,6 +241,29 @@ export default function MessagesClient({ currentUserId }: Props) {
         });
       }
 
+      /*
+  NEW MESSAGE BADGE
+*/
+
+      if (message.sender_id !== currentUserId) {
+        setUnreadUsers((prev) => {
+          if (prev.includes(message.sender_id)) {
+            return prev;
+          }
+
+          return [...prev, message.sender_id];
+        });
+
+        setUnreadCounts((prev) => ({
+          ...prev,
+
+          [message.sender_id]: (prev[message.sender_id] || 0) + 1,
+        }));
+      }
+      /*
+        UPDATE CONVERSATIONS
+      */
+
       setConversations((prev) => {
         const updated = [...prev];
 
@@ -219,6 +287,14 @@ export default function MessagesClient({ currentUserId }: Props) {
 
             created_at: message.created_at,
           };
+
+          /*
+            MOVE CONVERSATION TO TOP
+          */
+
+          const [conversation] = updated.splice(index, 1);
+
+          updated.unshift(conversation);
         }
 
         return updated;
@@ -447,11 +523,17 @@ export default function MessagesClient({ currentUserId }: Props) {
                   onClick={() => handleSelectUser(otherUserId)}
                   className={`${styles.userButton} ${
                     activeUser === otherUserId ? styles.active : ""
-                  }`}
+                  } ${unreadUsers.includes(otherUserId) ? styles.unread : ""}`}
                 >
                   <FaUserCircle className={styles.avatar} />
 
                   <div className={styles.userContent}>
+                    {unreadCounts[otherUserId] > 0 && (
+                      <div className={styles.countBadge}>
+                        {unreadCounts[otherUserId]}
+                      </div>
+                    )}
+
                     <h3>{otherUserName}</h3>
 
                     <p>{conversation.content}</p>

@@ -3,17 +3,93 @@
 
   flex-direction: column;
 
-  gap: 24px;
+  gap: 2rem;
+
+  padding: 2rem;
+
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(37, 99, 235, 0.08),
+      transparent 25%
+    ),
+    var(--background);
+}
+
+.top {
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 30px;
+
+  padding: 3rem;
+
+  background: linear-gradient(135deg, #1e3a8a, #2563eb, #3b82f6);
+
+  color: white;
+
+  box-shadow: 0 20px 45px rgba(37, 99, 235, 0.25);
+}
+
+.top::before {
+  content: "";
+
+  position: absolute;
+
+  width: 260px;
+
+  height: 260px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  top: -100px;
+
+  right: -60px;
 }
 
 .top h1 {
-  font-size: 2rem;
+  position: relative;
 
-  font-weight: 700;
+  z-index: 2;
+
+  font-size: clamp(2.4rem, 4vw, 3.3rem);
+
+  font-weight: 900;
+
+  letter-spacing: -1px;
+
+  margin-bottom: 0.8rem;
 }
 
 .top p {
-  margin-top: 8px;
+  position: relative;
 
-  color: var(--text-secondary);
+  z-index: 2;
+
+  max-width: 700px;
+
+  font-size: 1.05rem;
+
+  line-height: 1.8;
+
+  color: rgba(255, 255, 255, 0.88);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .top {
+    padding: 2rem;
+  }
+
+  .top h1 {
+    font-size: 2.2rem;
+  }
 }

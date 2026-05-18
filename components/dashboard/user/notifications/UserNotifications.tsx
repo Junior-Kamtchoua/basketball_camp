@@ -2,6 +2,10 @@
 
 import { useMemo, useState } from "react";
 
+import { useRouter } from "next/navigation";
+
+import toast from "react-hot-toast";
+
 import {
   Bell,
   Search,
@@ -13,6 +17,8 @@ import {
 
 import { Notification } from "@/types/notification";
 
+import { useAutoRefresh } from "@/hooks/useAutoRefresh";
+
 import styles from "./UserNotifications.module.css";
 
 interface Props {
@@ -20,7 +26,15 @@ interface Props {
 }
 
 export default function UserNotifications({ notifications }: Props) {
+  useAutoRefresh({
+    interval: 10000,
+  });
+
+  const router = useRouter();
+
   const [search, setSearch] = useState("");
+
+  const [loadingId, setLoadingId] = useState<string | null>(null);
 
   const filteredNotifications = useMemo(() => {
     return notifications.filter((notification) => {
@@ -37,10 +51,10 @@ export default function UserNotifications({ notifications }: Props) {
 
   function getNotificationIcon(type?: string) {
     switch (type) {
-      case "SUCCESS":
+      case "PAYMENT_APPROVED":
         return <CheckCircle2 size={20} />;
 
-      case "WARNING":
+      case "PAYMENT_REJECTED":
         return <AlertCircle size={20} />;
 
       case "INFO":
@@ -48,6 +62,39 @@ export default function UserNotifications({ notifications }: Props) {
 
       default:
         return <Bell size={20} />;
+    }
+  }
+
+  async function markAsRead(notificationId: string) {
+    try {
+      setLoadingId(notificationId);
+
+      const response = await fetch(
+        `/api/notifications/${notificationId}/read`,
+        {
+          method: "POST",
+        },
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed");
+      }
+
+      toast.success("Notification marked as read");
+
+      router.refresh();
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+
+        return;
+      }
+
+      toast.error("Failed to update notification");
+    } finally {
+      setLoadingId(null);
     }
   }
 
@@ -60,14 +107,13 @@ export default function UserNotifications({ notifications }: Props) {
           <h1>Notifications Center</h1>
 
           <p className={styles.description}>
-            Stay updated with academy activities, messages, attendance updates
-            and important announcements.
+            Stay updated with academy activities, payments and schedules.
           </p>
         </div>
 
         <div className={styles.statsGrid}>
           <div className={styles.statCard}>
-            <span>Total Notifications</span>
+            <span>Total</span>
 
             <strong>{notifications.length}</strong>
           </div>
@@ -127,11 +173,25 @@ export default function UserNotifications({ notifications }: Props) {
               </div>
 
               <div className={styles.footer}>
-                <Clock3 size={15} />
+                <div className={styles.time}>
+                  <Clock3 size={15} />
 
-                <small>
-                  {new Date(notification.created_at).toLocaleString()}
-                </small>
+                  <small>
+                    {new Date(notification.created_at).toLocaleString()}
+                  </small>
+                </div>
+
+                {!notification.is_read && (
+                  <button
+                    onClick={() => markAsRead(notification.id)}
+                    disabled={loadingId === notification.id}
+                    className={styles.readButton}
+                  >
+                    {loadingId === notification.id
+                      ? "Loading..."
+                      : "Mark as read"}
+                  </button>
+                )}
               </div>
             </div>
           ))}

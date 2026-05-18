@@ -2,8 +2,8 @@
 
 import {
   ResponsiveContainer,
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   Tooltip,
@@ -19,10 +19,22 @@ interface Props {
 }
 
 export default function RevenueAnalyticsChart({ data }: Props) {
+  const chartData =
+    data.length > 0
+      ? data
+      : [
+          {
+            month: "No Data",
+            revenue: 0,
+          },
+        ];
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div>
+          <span className={styles.badge}>ANALYTICS</span>
+
           <h2>Revenue Analytics</h2>
 
           <p>Monthly revenue overview</p>
@@ -30,9 +42,21 @@ export default function RevenueAnalyticsChart({ data }: Props) {
       </div>
 
       <div className={styles.chart}>
-        <ResponsiveContainer width="100%" height={320}>
-          <LineChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+        <ResponsiveContainer width="100%" height={340}>
+          <AreaChart data={chartData}>
+            <defs>
+              <linearGradient id="revenueGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#2563eb" stopOpacity={0.5} />
+
+                <stop offset="95%" stopColor="#2563eb" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+
+            <CartesianGrid
+              strokeDasharray="3 3"
+              vertical={false}
+              opacity={0.1}
+            />
 
             <XAxis dataKey="month" />
 
@@ -40,14 +64,14 @@ export default function RevenueAnalyticsChart({ data }: Props) {
 
             <Tooltip />
 
-            <Line
+            <Area
               type="monotone"
               dataKey="revenue"
               stroke="#2563eb"
-              strokeWidth={3}
-              dot={false}
+              strokeWidth={4}
+              fill="url(#revenueGradient)"
             />
-          </LineChart>
+          </AreaChart>
         </ResponsiveContainer>
       </div>
     </div>

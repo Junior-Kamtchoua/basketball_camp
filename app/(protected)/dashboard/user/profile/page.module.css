@@ -194,3 +194,25 @@
     padding: 1.5rem;
   }
 }
+
+.container {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2rem;
+}
+
+.infoGrid {
+  display: grid;
+
+  grid-template-columns: 1.2fr 0.8fr;
+
+  gap: 2rem;
+}
+
+@media (max-width: 992px) {
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,17 +1,36 @@
 import pool from "@/lib/db";
 
-import { Notification } from "@/types/notification";
+import { UserNotification } from "@/types/user-dashboard";
+
+interface NotificationRow {
+  id: string;
+
+  title: string;
+
+  message: string;
+
+  type: string;
+
+  is_read: boolean;
+
+  created_at: string;
+}
 
 export async function getUserNotifications(
   userId: string,
-): Promise<Notification[]> {
+): Promise<UserNotification[]> {
   const query = `
     SELECT
       id,
+
       title,
+
       message,
+
       type,
+
       is_read,
+
       created_at
 
     FROM notifications
@@ -23,5 +42,19 @@ export async function getUserNotifications(
 
   const result = await pool.query(query, [userId]);
 
-  return result.rows;
+  return result.rows.map(
+    (notification: NotificationRow): UserNotification => ({
+      id: notification.id,
+
+      title: notification.title,
+
+      message: notification.message,
+
+      type: notification.type,
+
+      is_read: notification.is_read,
+
+      created_at: notification.created_at,
+    }),
+  );
 }

@@ -10,6 +10,14 @@ interface DashboardStats {
   totalPrograms: number;
 
   totalRevenue: number;
+
+  pendingPayments: number;
+
+  pendingApplications: number;
+
+  totalEvents: number;
+
+  totalNotifications: number;
 }
 
 export async function getDashboardStats(): Promise<DashboardStats> {
@@ -23,6 +31,14 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     totalProgramsQuery,
 
     totalRevenueQuery,
+
+    pendingPaymentsQuery,
+
+    pendingApplicationsQuery,
+
+    totalEventsQuery,
+
+    totalNotificationsQuery,
   ] = await Promise.all([
     pool.query(`
       SELECT COUNT(*)::int AS count
@@ -63,6 +79,34 @@ export async function getDashboardStats(): Promise<DashboardStats> {
 
       WHERE status = 'PAID'
     `),
+
+    pool.query(`
+      SELECT COUNT(*)::int AS count
+
+      FROM payments
+
+      WHERE status = 'PENDING'
+    `),
+
+    pool.query(`
+      SELECT COUNT(*)::int AS count
+
+      FROM player_programs
+
+      WHERE status = 'PENDING'
+    `),
+
+    pool.query(`
+      SELECT COUNT(*)::int AS count
+
+      FROM events
+    `),
+
+    pool.query(`
+      SELECT COUNT(*)::int AS count
+
+      FROM notifications
+    `),
   ]);
 
   return {
@@ -75,5 +119,13 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     totalPrograms: totalProgramsQuery.rows[0].count,
 
     totalRevenue: totalRevenueQuery.rows[0].total,
+
+    pendingPayments: pendingPaymentsQuery.rows[0].count,
+
+    pendingApplications: pendingApplicationsQuery.rows[0].count,
+
+    totalEvents: totalEventsQuery.rows[0].count,
+
+    totalNotifications: totalNotificationsQuery.rows[0].count,
   };
 }
