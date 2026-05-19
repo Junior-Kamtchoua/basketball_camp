@@ -15,46 +15,30 @@ const forms = [
     title: "Basketball Camp Registration Form",
 
     description:
-      "Download the official basketball camp registration form required for player enrollment and participation.",
+      "Complete the official basketball camp registration directly inside your dashboard after logging into your account.",
 
     icon: <ClipboardList size={28} />,
 
-    file: "PDF Document",
-
-    pdf: "/file/Basketball_Camp_Registration_Form.pdf",
+    file: "Online Registration",
   },
 
   {
     title: "Basketball Club Registration Form",
 
     description:
-      "Download the official basketball club registration form for academy membership and player registration.",
+      "Complete the official basketball club registration directly inside your dashboard after logging into your account.",
 
     icon: <Users size={28} />,
 
-    file: "PDF Document",
-
-    pdf: "/file/Basketball_Club_Registration_Form.pdf",
+    file: "Online Registration",
   },
 ];
 
 export default function FormsPageContent() {
-  const handleDownload = (
-    pdfPath: string,
-
-    fileName: string,
-  ) => {
-    const link = document.createElement("a");
-
-    link.href = pdfPath;
-
-    link.download = fileName;
-
-    document.body.appendChild(link);
-
-    link.click();
-
-    document.body.removeChild(link);
+  const handleOpenInfo = () => {
+    alert(
+      "To complete your registration:\n\n1. Create an account or login\n2. Go to Dashboard → Payments\n3. Select your registration form\n4. Complete the form online\n5. Submit your registration for admin review",
+    );
   };
 
   return (
@@ -83,17 +67,9 @@ export default function FormsPageContent() {
 
               <p className="form-card__description">{form.description}</p>
 
-              <button
-                onClick={() =>
-                  handleDownload(
-                    form.pdf,
-
-                    `${form.title}.pdf`,
-                  )
-                }
-              >
+              <button onClick={handleOpenInfo}>
                 <Download size={18} />
-                Download PDF
+                Complete Registration
               </button>
             </div>
           ))}
@@ -121,11 +97,11 @@ export default function FormsPageContent() {
             </div>
 
             <div>
-              <h3>Easy Access</h3>
+              <h3>Easy Online Submission</h3>
 
               <p>
-                Download, print and complete forms before attending training
-                sessions.
+                Complete and submit your registration forms directly inside your
+                dashboard without downloading PDFs.
               </p>
             </div>
           </div>

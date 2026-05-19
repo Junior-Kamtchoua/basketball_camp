@@ -1,131 +1,85 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 
-import { Upload, FileText, CheckCircle2, Loader2 } from "lucide-react";
+import { ClipboardList, Users, ChevronRight } from "lucide-react";
 
-import toast from "react-hot-toast";
+import BasketballCampForm from "@/components/dashboard/user/forms/BasketballCampForm";
+
+import BasketballClubForm from "@/components/dashboard/user/forms/BasketballClubForm";
 
 import styles from "./RegistrationFormUpload.module.css";
 
+type FormType = "CAMP" | "CLUB" | null;
+
 export default function RegistrationFormUpload() {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  const [uploading, setUploading] = useState(false);
-
-  const [uploadedUrl, setUploadedUrl] = useState("");
-
-  async function handleUpload(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-
-    if (!file) {
-      return;
-    }
-
-    const allowedTypes = [
-      "application/pdf",
-      "image/png",
-      "image/jpeg",
-      "image/jpg",
-      "image/webp",
-    ];
-
-    if (!allowedTypes.includes(file.type)) {
-      toast.error("Only PDF and image files are allowed.");
-
-      return;
-    }
-
-    try {
-      setUploading(true);
-
-      const formData = new FormData();
-
-      formData.append("file", file);
-
-      const response = await fetch("/api/upload-registration-form", {
-        method: "POST",
-
-        body: formData,
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Upload failed");
-      }
-
-      setUploadedUrl(data.url);
-
-      toast.success("Registration form uploaded successfully");
-    } catch (error) {
-      console.error(error);
-
-      toast.error("Upload failed");
-    } finally {
-      setUploading(false);
-    }
-  }
+  const [activeForm, setActiveForm] = useState<FormType>(null);
 
   return (
-    <section className={styles.card}>
-      <div className={styles.content}>
-        <div className={styles.iconWrapper}>
-          <FileText size={34} />
-        </div>
+    <section className={styles.wrapper}>
+      <div className={styles.header}>
+        <h2>Registration Center</h2>
 
-        <div className={styles.textContent}>
-          <div className={styles.badge}>Required Document</div>
-
-          <h2>Basketball Registration Form</h2>
-
-          <p>
-            Please upload your official basketball registration form before
-            participating in academy activities. The admin team will review your
-            document.
-          </p>
-        </div>
+        <p>Select the registration type you want to complete.</p>
       </div>
 
-      <div className={styles.actions}>
-        <input
-          ref={inputRef}
-          type="file"
-          hidden
-          accept=".pdf,image/*"
-          onChange={handleUpload}
-        />
-
+      <div className={styles.cards}>
         <button
-          className={styles.uploadButton}
-          onClick={() => inputRef.current?.click()}
-          disabled={uploading}
+          type="button"
+          className={`${styles.optionCard} ${
+            activeForm === "CAMP" ? styles.activeCard : ""
+          }`}
+          onClick={() => setActiveForm("CAMP")}
         >
-          {uploading ? (
-            <>
-              <Loader2 size={20} className={styles.spinner} />
-              Uploading...
-            </>
-          ) : (
-            <>
-              <Upload size={20} />
-              Upload Registration Form
-            </>
-          )}
+          <div className={styles.iconBox}>
+            <ClipboardList size={34} />
+          </div>
+
+          <div className={styles.cardContent}>
+            <h3>Basketball Camp</h3>
+
+            <p>
+              Complete the official camp registration form for seasonal
+              basketball camps.
+            </p>
+          </div>
+
+          <ChevronRight size={24} className={styles.arrow} />
         </button>
 
-        {uploadedUrl && (
-          <a
-            href={uploadedUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.previewButton}
-          >
-            <CheckCircle2 size={18} />
-            View Uploaded File
-          </a>
-        )}
+        <button
+          type="button"
+          className={`${styles.optionCard} ${
+            activeForm === "CLUB" ? styles.activeCard : ""
+          }`}
+          onClick={() => setActiveForm("CLUB")}
+        >
+          <div className={styles.iconBox}>
+            <Users size={34} />
+          </div>
+
+          <div className={styles.cardContent}>
+            <h3>Basketball Club</h3>
+
+            <p>
+              Complete the official club registration form for academy
+              membership.
+            </p>
+          </div>
+
+          <ChevronRight size={24} className={styles.arrow} />
+        </button>
       </div>
+
+      {activeForm && (
+        <div className={styles.formSection}>
+          {activeForm === "CAMP" ? (
+            <BasketballCampForm />
+          ) : (
+            <BasketballClubForm />
+          )}
+        </div>
+      )}
     </section>
   );
 }
