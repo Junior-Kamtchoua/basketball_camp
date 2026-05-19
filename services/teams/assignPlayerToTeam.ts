@@ -1,3 +1,5 @@
+// services/teams/assignPlayerToTeam.ts
+
 import pool from "@/lib/db";
 
 interface AssignPlayerToTeamResponse {
@@ -6,23 +8,15 @@ interface AssignPlayerToTeamResponse {
 
 export async function assignPlayerToTeam(
   playerId: string,
-
   teamId: string,
 ): Promise<AssignPlayerToTeamResponse> {
-  /*
-    CHECK TEAM
-  */
-
   const teamQuery = await pool.query(
     `
-        SELECT id
-
-        FROM teams
-
-        WHERE id = $1
-
-        LIMIT 1
-      `,
+      SELECT id
+      FROM teams
+      WHERE id = $1
+      LIMIT 1
+    `,
     [teamId],
   );
 
@@ -30,20 +24,13 @@ export async function assignPlayerToTeam(
     throw new Error("Team not found");
   }
 
-  /*
-    CHECK PLAYER
-  */
-
   const playerQuery = await pool.query(
     `
-        SELECT id
-
-        FROM players
-
-        WHERE id = $1
-
-        LIMIT 1
-      `,
+      SELECT id
+      FROM players
+      WHERE id = $1
+      LIMIT 1
+    `,
     [playerId],
   );
 
@@ -51,16 +38,10 @@ export async function assignPlayerToTeam(
     throw new Error("Player not found");
   }
 
-  /*
-    ASSIGN TEAM
-  */
-
   await pool.query(
     `
       UPDATE players
-
       SET team_id = $1
-
       WHERE id = $2
     `,
     [teamId, playerId],

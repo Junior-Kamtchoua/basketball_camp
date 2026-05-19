@@ -1,17 +1,14 @@
+// app/api/upload-document/route.ts
+
 import { NextRequest } from "next/server";
 
 import cloudinary from "@/lib/cloudinary";
-
 import pool from "@/lib/db";
 
 import { getCurrentUser } from "@/lib/getCurrentUser";
 
 export async function POST(request: NextRequest) {
   try {
-    /*
-      AUTH
-    */
-
     const user = await getCurrentUser();
 
     if (!user) {
@@ -24,10 +21,6 @@ export async function POST(request: NextRequest) {
         },
       );
     }
-
-    /*
-      FORM DATA
-    */
 
     const formData = await request.formData();
 
@@ -48,10 +41,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    /*
-      VALIDATION
-    */
-
     const allowedTypes = [
       "application/pdf",
       "image/png",
@@ -71,10 +60,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    /*
-      BUFFER
-    */
-
     const bytes = await file.arrayBuffer();
 
     const buffer = Buffer.from(bytes);
@@ -83,19 +68,11 @@ export async function POST(request: NextRequest) {
 
     const dataURI = `data:${file.type};base64,${base64}`;
 
-    /*
-      CLOUDINARY
-    */
-
     const uploadedFile = await cloudinary.uploader.upload(dataURI, {
       folder: "basketball-documents",
 
       resource_type: "raw",
     });
-
-    /*
-      SAVE DOCUMENT
-    */
 
     await pool.query(
       `
@@ -105,7 +82,6 @@ export async function POST(request: NextRequest) {
           file_url,
           document_type
         )
-
         VALUES (
           $1,
           $2,
@@ -120,10 +96,6 @@ export async function POST(request: NextRequest) {
         documentType || "GENERAL",
       ],
     );
-
-    /*
-      SUCCESS
-    */
 
     return Response.json({
       success: true,

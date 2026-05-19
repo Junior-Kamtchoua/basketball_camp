@@ -1,3 +1,5 @@
+// server.js
+
 import { createServer } from "http";
 import next from "next";
 import { Server } from "socket.io";
@@ -5,7 +7,6 @@ import { Server } from "socket.io";
 const dev = process.env.NODE_ENV !== "production";
 
 const hostname = "localhost";
-
 const port = 3000;
 
 const app = next({
@@ -27,40 +28,25 @@ app.prepare().then(() => {
     },
   });
 
-  /*
-   ONLINE USERS
-  */
-
+  /* ONLINE USERS */
   const onlineUsers = new Map();
 
   io.on("connection", (socket) => {
     console.log("Socket connected:", socket.id);
 
-    /*
-       JOIN USER
-      */
-
+    /* JOIN USER */
     socket.on("join", (userId) => {
       onlineUsers.set(userId, socket.id);
 
       io.emit("online-users", Array.from(onlineUsers.keys()));
     });
 
-    /*
-       SEND MESSAGE
-      */
-
+    /* SEND MESSAGE */
     socket.on("send-message", (message) => {
-      /*
-        REALTIME MESSAGE
-      */
-
+      /* REALTIME MESSAGE */
       io.emit("receive-message", message);
 
-      /*
-        RECEIVER NOTIFICATION
-      */
-
+      /* RECEIVER NOTIFICATION */
       const receiverSocketId = onlineUsers.get(message.receiver_id);
 
       if (receiverSocketId) {
@@ -68,26 +54,17 @@ app.prepare().then(() => {
       }
     });
 
-    /*
-      CLEAR CHAT NOTIFICATIONS
-    */
-
+    /* CLEAR CHAT NOTIFICATIONS */
     socket.on("clear-chat-notifications", () => {
       io.emit("clear-chat-notifications");
     });
 
-    /*
-       TYPING
-      */
-
+    /* TYPING */
     socket.on("typing", (data) => {
       socket.broadcast.emit("typing", data);
     });
 
-    /*
-       DISCONNECT
-      */
-
+    /* DISCONNECT */
     socket.on("disconnect", () => {
       for (const [userId, socketId] of onlineUsers.entries()) {
         if (socketId === socket.id) {

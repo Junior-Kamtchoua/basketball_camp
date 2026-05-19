@@ -1,10 +1,10 @@
-import bcrypt from "bcryptjs";
+// services/auth/changePassword.ts
 
+import bcrypt from "bcryptjs";
 import pool from "@/lib/db";
 
 interface ChangePasswordInput {
   userId: string;
-
   newPassword: string;
 }
 
@@ -16,12 +16,10 @@ export async function changePassword({
 
   const query = `
     UPDATE users
-
     SET
       password = $1,
       must_change_password = false,
       temporary_password = false
-
     WHERE id = $2
   `;
 

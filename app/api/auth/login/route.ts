@@ -1,14 +1,11 @@
 import { NextRequest } from "next/server";
-
 import { cookies } from "next/headers";
 
 import { loginUser } from "@/services/auth/loginUser";
-
 import { generateToken } from "@/lib/auth";
 
 interface LoginRequestBody {
   email: string;
-
   password: string;
 }
 
@@ -29,15 +26,12 @@ export async function POST(request: NextRequest) {
 
     const user = await loginUser({
       email: body.email,
-
       password: body.password,
     });
 
     const token = generateToken({
       userId: user.id,
-
       role: user.role,
-
       must_change_password: user.must_change_password,
     });
 
@@ -45,28 +39,19 @@ export async function POST(request: NextRequest) {
 
     cookieStore.set({
       name: "token",
-
       value: token,
-
       httpOnly: true,
-
       secure: process.env.NODE_ENV === "production",
-
       sameSite: "lax",
-
       path: "/",
-
       maxAge: 60 * 60 * 24 * 7,
     });
 
     return Response.json({
       success: true,
-
       user: {
         id: user.id,
-
         role: user.role,
-
         must_change_password: user.must_change_password,
       },
     });

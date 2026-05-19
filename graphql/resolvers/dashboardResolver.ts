@@ -1,3 +1,5 @@
+// graphql/resolvers/dashboardResolver.ts
+
 import { getDashboardStats } from "@/services/dashboard/getDashboardStats";
 
 export const dashboardResolver = {

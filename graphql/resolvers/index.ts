@@ -1,15 +1,11 @@
+// graphql/resolvers/index.ts
+
 import { dashboardResolver } from "./dashboardResolver";
-
 import { userResolver } from "./userResolver";
-
 import { teamResolver } from "./teamResolver";
-
 import { authResolver } from "./authResolver";
-
 import { userMutationResolver } from "./userMutationResolver";
-
 import { updateUserResolver } from "./updateUserResolver";
-
 import { programResolver } from "./programResolver";
 
 export const resolvers = {

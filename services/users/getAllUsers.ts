@@ -1,3 +1,5 @@
+// services/users/getAllUsers.ts
+
 import pool from "@/lib/db";
 
 export async function getAllUsers() {
@@ -13,9 +15,7 @@ export async function getAllUsers() {
       is_verified,
       created_at,
       basketball_registration_form_url
-
     FROM users
-
     ORDER BY created_at DESC
   `;
 

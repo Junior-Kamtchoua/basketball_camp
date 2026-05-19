@@ -1,8 +1,9 @@
+// services/audit/createActivityLog.ts
+
 import pool from "@/lib/db";
 
 interface Props {
   action: string;
-
   type: string;
 }
 
@@ -13,7 +14,6 @@ export async function createActivityLog({ action, type }: Props) {
         action,
         type
       )
-
       VALUES ($1, $2)
     `,
     [action, type],

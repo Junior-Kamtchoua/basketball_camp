@@ -1,3 +1,5 @@
+// services/programs/getPrograms.ts
+
 import pool from "@/lib/db";
 
 import { Program } from "@/types/program";
@@ -11,9 +13,7 @@ export async function getPrograms(): Promise<Program[]> {
       price,
       duration_weeks,
       created_at
-
     FROM programs
-
     ORDER BY created_at DESC
   `;
 

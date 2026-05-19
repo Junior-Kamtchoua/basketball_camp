@@ -1,30 +1,23 @@
+// services/teams/updateTeam.ts
+
 import pool from "@/lib/db";
 
 import { Team } from "@/types/team";
 
 interface UpdateTeamInput {
   id: string;
-
   name: string;
-
   age_group?: string;
-
   win_rate: number;
 }
 
 interface TeamRow {
   id: string;
-
   name: string;
-
   age_group: string | null;
-
   logo_url: string | null;
-
   coach_id: string | null;
-
   win_rate: number;
-
   created_at: string;
 }
 
@@ -36,14 +29,11 @@ export async function updateTeam({
 }: UpdateTeamInput): Promise<Team> {
   const query = `
     UPDATE teams
-
     SET
       name = $1,
       age_group = $2,
       win_rate = $3
-
     WHERE id = $4
-
     RETURNING *
   `;
 

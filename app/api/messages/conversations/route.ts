@@ -1,5 +1,6 @@
-import { getCurrentUser } from "@/lib/getCurrentUser";
+// app/api/messages/conversations/route.ts
 
+import { getCurrentUser } from "@/lib/getCurrentUser";
 import { getUserConversations } from "@/services/messages/getUserConversations";
 
 export async function GET() {

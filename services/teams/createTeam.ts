@@ -1,26 +1,21 @@
+// services/teams/createTeam.ts
+
 import pool from "@/lib/db";
 
 import { Team } from "@/types/team";
 
 interface CreateTeamInput {
   name: string;
-
   age_group?: string;
 }
 
 interface TeamRow {
   id: string;
-
   name: string;
-
   age_group: string | null;
-
   logo_url: string | null;
-
   coach_id: string | null;
-
   win_rate: number;
-
   created_at: string;
 }
 
@@ -31,13 +26,11 @@ export async function createTeam(input: CreateTeamInput): Promise<Team> {
       age_group,
       win_rate
     )
-
     VALUES (
       $1,
       $2,
       0
     )
-
     RETURNING *
   `;
 

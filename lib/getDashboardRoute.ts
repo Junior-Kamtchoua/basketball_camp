@@ -1,3 +1,5 @@
+// lib/getDashboardRoute.ts
+
 export function getDashboardRoute(role: string) {
   switch (role) {
     case "ADMIN":

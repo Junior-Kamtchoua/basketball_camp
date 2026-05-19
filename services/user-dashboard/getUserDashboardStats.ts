@@ -1,3 +1,5 @@
+// services/user-dashboard/getUserDashboardStats.ts
+
 import pool from "@/lib/db";
 
 import { UserDashboardStats } from "@/types/user-dashboard";
@@ -5,18 +7,11 @@ import { UserDashboardStats } from "@/types/user-dashboard";
 export async function getUserDashboardStats(
   userId: string,
 ): Promise<UserDashboardStats> {
-  /*
-   GET PLAYER ID FROM USER
-  */
-
   const playerQuery = await pool.query(
     `
       SELECT id
-
       FROM players
-
       WHERE user_id = $1
-
       LIMIT 1
     `,
     [userId],
@@ -24,27 +19,16 @@ export async function getUserDashboardStats(
 
   const player = playerQuery.rows[0];
 
-  /*
-   NO PLAYER PROFILE
-  */
-
   if (!player) {
     return {
       attendanceRate: 0,
-
       totalPrograms: 0,
-
       totalPayments: 0,
-
       unreadMessages: 0,
     };
   }
 
   const playerId: string = player.id;
-
-  /*
-   DASHBOARD STATS
-  */
 
   const [attendanceQuery, programsQuery, paymentsQuery, messagesQuery] =
     await Promise.all([
@@ -63,9 +47,7 @@ export async function getUserDashboardStats(
             ),
             0
           )::int AS rate
-
         FROM attendance
-
         WHERE player_id = $1
       `,
         [playerId],
@@ -73,11 +55,8 @@ export async function getUserDashboardStats(
 
       pool.query(
         `
-        SELECT
-          COUNT(*)::int AS total
-
+        SELECT COUNT(*)::int AS total
         FROM player_programs
-
         WHERE player_id = $1
       `,
         [playerId],
@@ -90,9 +69,7 @@ export async function getUserDashboardStats(
             SUM(amount),
             0
           )::float AS total
-
         FROM payments
-
         WHERE player_id = $1
       `,
         [playerId],
@@ -100,11 +77,8 @@ export async function getUserDashboardStats(
 
       pool.query(
         `
-        SELECT
-          COUNT(*)::int AS total
-
+        SELECT COUNT(*)::int AS total
         FROM messages
-
         WHERE receiver_id = $1
         AND is_read = false
       `,

@@ -1,15 +1,13 @@
+// app/api/messages/send/route.ts
+
 import { NextRequest } from "next/server";
 
 import { getCurrentUser } from "@/lib/getCurrentUser";
-
 import { sendMessage } from "@/services/messages/sendMessage";
 
 export async function POST(request: NextRequest) {
   try {
-    /*
-      AUTH USER
-    */
-
+    /* AUTH USER */
     const user = await getCurrentUser();
 
     if (!user) {
@@ -23,16 +21,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    /*
-      REQUEST BODY
-    */
-
+    /* REQUEST BODY */
     const body = await request.json();
 
-    /*
-      VALIDATION
-    */
-
+    /* VALIDATION */
     if (!body.receiver_id) {
       return Response.json(
         {
@@ -44,26 +36,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    /*
-      SAVE MESSAGE
-    */
-
+    /* SAVE MESSAGE */
     const message = await sendMessage({
       sender_id: user.id,
-
       receiver_id: body.receiver_id,
-
       content: body.content || "",
-
       attachment_url: body.attachment_url,
-
       audio_url: body.audio_url,
     });
 
-    /*
-      SUCCESS
-    */
-
+    /* SUCCESS */
     return Response.json(message);
   } catch (error) {
     console.error(error);

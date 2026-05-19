@@ -1,3 +1,5 @@
+// app/api/upload-registration-form/route.ts
+
 import { NextRequest } from "next/server";
 
 import { getCurrentUser } from "@/lib/getCurrentUser";
@@ -8,10 +10,6 @@ import pool from "@/lib/db";
 
 export async function POST(request: NextRequest) {
   try {
-    /*
-      AUTH USER
-    */
-
     const user = await getCurrentUser();
 
     if (!user) {
@@ -24,10 +22,6 @@ export async function POST(request: NextRequest) {
         },
       );
     }
-
-    /*
-      GET FILE
-    */
 
     const formData = await request.formData();
 
@@ -43,10 +37,6 @@ export async function POST(request: NextRequest) {
         },
       );
     }
-
-    /*
-      FILE VALIDATION
-    */
 
     const allowedTypes = [
       "application/pdf",
@@ -67,10 +57,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    /*
-      CONVERT FILE
-    */
-
     const bytes = await file.arrayBuffer();
 
     const buffer = Buffer.from(bytes);
@@ -79,15 +65,7 @@ export async function POST(request: NextRequest) {
 
     const dataURI = `data:${file.type};base64,${base64}`;
 
-    /*
-      KEEP ORIGINAL FILE NAME
-    */
-
     const originalName = file.name.replace(/\.[^/.]+$/, "");
-
-    /*
-      UPLOAD TO CLOUDINARY
-    */
 
     const uploadedFile = await cloudinary.uploader.upload(dataURI, {
       folder: "basketball-registration-forms",
@@ -103,10 +81,6 @@ export async function POST(request: NextRequest) {
       overwrite: true,
     });
 
-    /*
-      SAVE URL IN DATABASE
-    */
-
     await pool.query(
       `
         UPDATE users
@@ -115,10 +89,6 @@ export async function POST(request: NextRequest) {
       `,
       [uploadedFile.secure_url, user.id],
     );
-
-    /*
-      SUCCESS
-    */
 
     return Response.json({
       success: true,

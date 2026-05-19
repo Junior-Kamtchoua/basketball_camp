@@ -1,20 +1,14 @@
 import { cookies } from "next/headers";
 
 import { verifyToken, JwtPayload } from "./auth";
-
 import pool from "./db";
 
 interface CurrentUser {
   id: string;
-
   first_name: string;
-
   last_name: string;
-
   email: string;
-
   role: "ADMIN" | "USER";
-
   avatar_url?: string;
 }
 
@@ -43,11 +37,8 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
       email,
       role,
       avatar_url
-
     FROM users
-
     WHERE id = $1
-
     LIMIT 1
   `;
 

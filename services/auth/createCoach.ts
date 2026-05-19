@@ -1,14 +1,12 @@
-import bcrypt from "bcryptjs";
+// services/auth/createCoach.ts
 
+import bcrypt from "bcryptjs";
 import pool from "@/lib/db";
 
 interface CreateCoachInput {
   first_name: string;
-
   last_name: string;
-
   email: string;
-
   password: string;
 }
 
@@ -30,7 +28,6 @@ export async function createCoach({
       must_change_password,
       temporary_password
     )
-
     VALUES (
       $1,
       $2,
@@ -40,7 +37,6 @@ export async function createCoach({
       true,
       true
     )
-
     RETURNING id
   `;
 

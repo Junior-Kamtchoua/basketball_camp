@@ -1,9 +1,9 @@
+// components/auth/login/LoginForm.tsx
+
 "use client";
 
 import { useState } from "react";
-
 import Link from "next/link";
-
 import Image from "next/image";
 
 import {
@@ -24,23 +24,18 @@ import "./login.css";
 
 interface LoginUser {
   id: string;
-
   role: "ADMIN" | "USER";
-
   must_change_password: boolean;
 }
 
 interface ApiLoginResponse {
   success?: boolean;
-
   user?: LoginUser;
-
   error?: string;
 }
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
-
   const [password, setPassword] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);

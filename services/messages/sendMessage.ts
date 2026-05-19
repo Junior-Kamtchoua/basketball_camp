@@ -1,14 +1,12 @@
+// services/messages/sendMessage.ts
+
 import pool from "@/lib/db";
 
 interface Props {
   sender_id: string;
-
   receiver_id: string;
-
   content?: string;
-
   attachment_url?: string | null;
-
   audio_url?: string | null;
 }
 
@@ -29,7 +27,6 @@ export async function sendMessage({
       delivered
     )
     VALUES ($1, $2, $3, $4, $5, true)
-
     RETURNING
       id,
       sender_id,

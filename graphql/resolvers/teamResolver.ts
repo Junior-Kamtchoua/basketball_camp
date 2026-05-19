@@ -1,3 +1,5 @@
+// graphql/resolvers/teamResolver.ts
+
 import { getAllTeams } from "@/services/teams/getAllTeams";
 
 import { createTeam } from "@/services/teams/createTeam";
@@ -13,7 +15,6 @@ import { Team } from "@/types/team";
 interface CreateTeamArgs {
   input: {
     name: string;
-
     age_group?: string;
   };
 }
@@ -21,11 +22,8 @@ interface CreateTeamArgs {
 interface UpdateTeamArgs {
   input: {
     id: string;
-
     name: string;
-
     age_group?: string;
-
     win_rate: number;
   };
 }
@@ -36,7 +34,6 @@ interface DeleteTeamArgs {
 
 interface AssignPlayerArgs {
   playerId: string;
-
   teamId: string;
 }
 
@@ -54,7 +51,6 @@ export const teamResolver = {
   Mutation: {
     createTeam: async (
       _: unknown,
-
       { input }: CreateTeamArgs,
     ): Promise<Team> => {
       return await createTeam(input);
@@ -62,7 +58,6 @@ export const teamResolver = {
 
     updateTeam: async (
       _: unknown,
-
       { input }: UpdateTeamArgs,
     ): Promise<Team> => {
       return await updateTeam(input);
@@ -70,7 +65,6 @@ export const teamResolver = {
 
     deleteTeam: async (
       _: unknown,
-
       { teamId }: DeleteTeamArgs,
     ): Promise<MutationResponse> => {
       return await deleteTeam(teamId);
@@ -78,7 +72,6 @@ export const teamResolver = {
 
     assignPlayerToTeam: async (
       _: unknown,
-
       { playerId, teamId }: AssignPlayerArgs,
     ): Promise<MutationResponse> => {
       return await assignPlayerToTeam(playerId, teamId);

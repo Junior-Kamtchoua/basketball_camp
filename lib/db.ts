@@ -15,10 +15,17 @@ const pool =
   new Pool({
     connectionString,
 
-    ssl: {
-      rejectUnauthorized: false,
-    },
+    ssl:
+      process.env.NODE_ENV === "production"
+        ? {
+            rejectUnauthorized: false,
+          }
+        : false,
   });
+
+pool.on("error", (error) => {
+  console.error("PostgreSQL pool error:", error);
+});
 
 if (process.env.NODE_ENV !== "production") {
   global.pgPool = pool;

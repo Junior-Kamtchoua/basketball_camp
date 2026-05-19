@@ -1,3 +1,5 @@
+// lib/permissions.ts
+
 export const permissions = {
   SUPER_ADMIN: [
     "MANAGE_USERS",

@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+// app/layout.tsx
 
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 
 import ToastProvider from "@/components/ui/toast/ToastProvider";
-
 import { ThemeProvider } from "@/context/ThemeContext";
 
 const geistSans = Geist({
@@ -20,7 +20,6 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Basketball Academy Dashboard",
-
   description: "Modern Basketball Academy Management System",
 };
 
@@ -38,7 +37,6 @@ export default function RootLayout({ children }: Readonly<Props>) {
       <body>
         <ThemeProvider>
           <ToastProvider />
-
           {children}
         </ThemeProvider>
       </body>

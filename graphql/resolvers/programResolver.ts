@@ -1,3 +1,5 @@
+// graphql/resolvers/programResolver.ts
+
 import { getPrograms } from "@/services/programs/getPrograms";
 
 import { joinProgram } from "@/services/programs/joinProgram";
@@ -11,13 +13,9 @@ import { rejectProgramApplication } from "@/services/programs/rejectProgramAppli
 interface CreateProgramArgs {
   input: {
     title: string;
-
     description?: string;
-
     price: number;
-
     duration_weeks: number;
-
     max_players: number;
   };
 }
@@ -38,35 +36,24 @@ interface GraphQLContext {
 
 export const programResolver = {
   Mutation: {
-    createProgram: async (
-      _: unknown,
-
-      { input }: CreateProgramArgs,
-    ) => {
+    createProgram: async (_: unknown, { input }: CreateProgramArgs) => {
       return await createProgram(input);
     },
 
     joinProgram: async (
       _: unknown,
-
       { programId }: JoinProgramArgs,
-
       context: GraphQLContext,
     ) => {
       if (!context.user) {
         throw new Error("Unauthorized");
       }
 
-      return await joinProgram(
-        context.user.id,
-
-        programId,
-      );
+      return await joinProgram(context.user.id, programId);
     },
 
     approveProgramApplication: async (
       _: unknown,
-
       { applicationId }: ProgramApplicationArgs,
     ) => {
       return await approveProgramApplication(applicationId);
@@ -74,7 +61,6 @@ export const programResolver = {
 
     rejectProgramApplication: async (
       _: unknown,
-
       { applicationId }: ProgramApplicationArgs,
     ) => {
       return await rejectProgramApplication(applicationId);
