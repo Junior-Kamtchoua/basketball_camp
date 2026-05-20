@@ -10,6 +10,7 @@ import {
   FaBell,
   FaClipboardList,
   FaEnvelope,
+  FaFileAlt,
 } from "react-icons/fa";
 
 import { IconType } from "react-icons";
@@ -37,6 +38,14 @@ export const sidebarLinks: SidebarLink[] = [
     href: "/dashboard/admin/users",
 
     icon: FaUsers,
+  },
+
+  {
+    title: "Forms",
+
+    href: "/dashboard/admin/forms",
+
+    icon: FaFileAlt,
   },
 
   {

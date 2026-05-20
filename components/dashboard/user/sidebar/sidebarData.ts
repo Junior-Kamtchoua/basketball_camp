@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { FaChartLine } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
+import { FileText } from "lucide-react";
 
 import { IconType } from "react-icons";
 
@@ -46,7 +47,11 @@ export const userSidebarLinks: UserSidebarLink[] = [
 
     icon: FaClipboardCheck,
   },
-
+  {
+    title: "Forms",
+    href: "/dashboard/user/forms",
+    icon: FileText,
+  },
   {
     title: "Payments",
 

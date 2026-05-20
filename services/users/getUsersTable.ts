@@ -25,18 +25,26 @@ export async function getUsersTable({ search = "" }: Props) {
 
       players.team_id,
 
-      teams.name
-        AS team_name
+      teams.name AS team_name,
+
+      registration_forms.id AS registration_form_id,
+
+      registration_forms.form_type,
+
+      registration_forms.status AS registration_status,
+
+      registration_forms.submitted_at
 
     FROM users
 
     LEFT JOIN players
-      ON players.user_id =
-      users.id
+      ON players.user_id = users.id
 
     LEFT JOIN teams
-      ON teams.id =
-      players.team_id
+      ON teams.id = players.team_id
+
+    LEFT JOIN registration_forms
+      ON registration_forms.user_id = users.id
 
     WHERE
       users.first_name ILIKE $1

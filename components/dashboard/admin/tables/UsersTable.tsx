@@ -31,6 +31,14 @@ interface User {
 
   basketball_registration_form_url?: string | null;
 
+  registration_form_id?: string | null;
+
+  form_type?: "CAMP" | "CLUB" | null;
+
+  registration_status?: "PENDING" | "APPROVED" | "REJECTED" | null;
+
+  submitted_at?: string | null;
+
   team_id?: string | null;
 
   team_name?: string | null;
@@ -63,6 +71,10 @@ export default function UsersTable({ users }: Props) {
     (page - 1) * ITEMS_PER_PAGE,
     page * ITEMS_PER_PAGE,
   );
+
+  function formatDate(date: string) {
+    return new Intl.DateTimeFormat("en-GB").format(new Date(date));
+  }
 
   return (
     <div className={styles.container}>
@@ -103,7 +115,25 @@ export default function UsersTable({ users }: Props) {
             <td>{user.email}</td>
 
             <td>
-              {user.basketball_registration_form_url ? (
+              {user.registration_form_id ? (
+                <div className={styles.registrationInfo}>
+                  <span className={styles.formBadge}>
+                    {user.form_type} FORM
+                  </span>
+
+                  <span
+                    className={`${styles.formStatus} ${
+                      user.registration_status === "APPROVED"
+                        ? styles.approved
+                        : user.registration_status === "REJECTED"
+                          ? styles.rejected
+                          : styles.pending
+                    }`}
+                  >
+                    {user.registration_status}
+                  </span>
+                </div>
+              ) : user.basketball_registration_form_url ? (
                 <div className={styles.documentActions}>
                   <a
                     href={user.basketball_registration_form_url}
@@ -140,9 +170,7 @@ export default function UsersTable({ users }: Props) {
               </span>
             </td>
 
-            <td suppressHydrationWarning>
-              {new Date(user.created_at).toLocaleDateString("en-GB")}
-            </td>
+            <td suppressHydrationWarning>{formatDate(user.created_at)}</td>
 
             <td className={styles.actions}>
               <EditUserButton user={user} />

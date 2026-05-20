@@ -9,8 +9,6 @@ import ZellePaymentCard from "@/components/dashboard/user/payments/ZellePaymentC
 
 import UploadPaymentProof from "@/components/dashboard/user/payments/UploadPaymentProof";
 
-import RegistrationFormUpload from "@/components/dashboard/user/payments/RegistrationFormUpload";
-
 import { getUserPayments } from "@/services/user-dashboard/getUserPayments";
 
 import { getUserPrograms } from "@/services/user-dashboard/getUserPrograms";
@@ -86,8 +84,6 @@ export default async function PaymentsPage() {
       <ZellePaymentCard />
 
       <UploadPaymentProof programs={programs} />
-
-      <RegistrationFormUpload />
 
       {payments.length === 0 ? (
         <div className={styles.empty}>

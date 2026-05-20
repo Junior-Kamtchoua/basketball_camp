@@ -77,7 +77,7 @@ export default function BasketballCampForm() {
     try {
       setLoading(true);
 
-      const response = await fetch("/api/forms/submit", {
+      const response = await fetch("/api/admin/forms/submit", {
         method: "POST",
 
         headers: {

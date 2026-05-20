@@ -1,20 +1,19 @@
 "use client";
 
-import { useState } from "react";
-
 import { ClipboardList, Users, ChevronRight } from "lucide-react";
-
-import BasketballCampForm from "@/components/dashboard/user/forms/BasketballCampForm";
-
-import BasketballClubForm from "@/components/dashboard/user/forms/BasketballClubForm";
 
 import styles from "./RegistrationFormUpload.module.css";
 
-type FormType = "CAMP" | "CLUB" | null;
+type Props = {
+  activeForm: "CAMP" | "CLUB" | null;
 
-export default function RegistrationFormUpload() {
-  const [activeForm, setActiveForm] = useState<FormType>(null);
+  setActiveForm: (value: "CAMP" | "CLUB") => void;
+};
 
+export default function RegistrationFormUpload({
+  activeForm,
+  setActiveForm,
+}: Props) {
   return (
     <section className={styles.wrapper}>
       <div className={styles.header}>
@@ -70,16 +69,6 @@ export default function RegistrationFormUpload() {
           <ChevronRight size={24} className={styles.arrow} />
         </button>
       </div>
-
-      {activeForm && (
-        <div className={styles.formSection}>
-          {activeForm === "CAMP" ? (
-            <BasketballCampForm />
-          ) : (
-            <BasketballClubForm />
-          )}
-        </div>
-      )}
     </section>
   );
 }

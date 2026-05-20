@@ -1,0 +1,131 @@
+.container {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2rem;
+}
+
+.hero {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 2rem;
+
+  padding: 2rem;
+
+  border-radius: 30px;
+
+  background: linear-gradient(135deg, #1d4ed8, #172554);
+
+  color: white;
+}
+
+.badge {
+  display: inline-flex;
+
+  padding: 0.5rem 1rem;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  font-size: 0.8rem;
+
+  font-weight: 800;
+
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-size: 2.4rem;
+
+  font-weight: 900;
+
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.status {
+  padding: 0.8rem 1.2rem;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  font-weight: 800;
+}
+
+.section {
+  padding: 2rem;
+
+  border-radius: 30px;
+
+  background: var(--card-bg);
+
+  border: 1px solid var(--border-color);
+}
+
+.section h2 {
+  margin-bottom: 2rem;
+
+  font-size: 1.5rem;
+
+  font-weight: 900;
+}
+
+.grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+  gap: 1.5rem;
+}
+
+.card {
+  padding: 1.5rem;
+
+  border-radius: 22px;
+
+  background: rgba(37, 99, 235, 0.06);
+
+  border: 1px solid rgba(37, 99, 235, 0.12);
+}
+
+.card h3 {
+  font-size: 0.9rem;
+
+  color: #2563eb;
+
+  margin-bottom: 0.7rem;
+
+  font-weight: 800;
+}
+
+.card p {
+  line-height: 1.7;
+
+  word-break: break-word;
+}
+
+@media screen and (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .section {
+    padding: 1.5rem;
+  }
+}
