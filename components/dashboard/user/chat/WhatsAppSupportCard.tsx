@@ -17,7 +17,7 @@ export default function WhatsAppSupportCard() {
       </p>
 
       <a
-        href="https://wa.me/4232009555?text=Hello%20Admin%2C%20I%20need%20help."
+        href="https://wa.me/+14232009555?text=Hello%20Admin%2C%20I%20need%20help."
         target="_blank"
         rel="noopener noreferrer"
         className={styles.button}
