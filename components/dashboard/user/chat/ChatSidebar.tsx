@@ -4,6 +4,8 @@ import { Search } from "lucide-react";
 
 import { ChatUser } from "@/types/chat";
 
+import WhatsAppSupportCard from "./WhatsAppSupportCard";
+
 import styles from "./ChatSidebar.module.css";
 
 interface Props {
@@ -48,6 +50,8 @@ export default function ChatSidebar({
           </button>
         ))}
       </div>
+
+      <WhatsAppSupportCard />
     </aside>
   );
 }
