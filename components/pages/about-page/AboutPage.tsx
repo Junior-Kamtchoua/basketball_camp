@@ -20,7 +20,7 @@ export default function AboutPageContent() {
             <h2 className="page-title">Building Leaders Through Basketball</h2>
 
             <p className="page-text">
-              Friendship Basketball Academy (FBA) is more than a basketball
+              Butterfly Basketball Academy (FBA) is more than a basketball
               training center. We are a community dedicated to developing young
               athletes through discipline, teamwork, leadership and elite
               basketball education.

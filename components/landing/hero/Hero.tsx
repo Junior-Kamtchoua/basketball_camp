@@ -17,7 +17,7 @@ export default function Hero() {
           </p>
 
           <p className="hero__description">
-            At Friendship Basketball Academy, we build skills, character and
+            At Butterfly Basketball Academy, we build skills, character and
             confidence through expert training, teamwork and a commitment to
             excellence.
           </p>

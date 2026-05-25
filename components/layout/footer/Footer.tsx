@@ -13,7 +13,7 @@ export default function Footer() {
             <h2 className="footer__logo">FBA</h2>
 
             <p className="footer__description">
-              Friendship Basketball Academy develops athletes through elite
+              Butterfly Basketball Academy develops athletes through elite
               training, discipline and leadership.
             </p>
           </div>
@@ -64,7 +64,7 @@ export default function Footer() {
         </div>
 
         <div className="footer__bottom">
-          <p>© 2026 Friendship Basketball Academy. All rights reserved.</p>
+          <p>© 2026 Butterfly Basketball Academy. All rights reserved.</p>
         </div>
       </div>
     </footer>

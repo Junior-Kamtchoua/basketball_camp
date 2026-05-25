@@ -111,7 +111,7 @@ export default function BasketballCampForm() {
       <div className={styles.logoWrapper}>
         <Image
           src="/images/logo1.png"
-          alt="Friendship Basketball Academy"
+          alt="Butterfly Basketball Academy"
           width={180}
           height={180}
           priority
@@ -122,7 +122,7 @@ export default function BasketballCampForm() {
         <h1>Basketball Camp Registration Form</h1>
 
         <p>
-          Please complete the official Friendship Basketball Academy camp
+          Please complete the official Butterfly Basketball Academy camp
           registration form.
         </p>
       </div>
@@ -404,7 +404,7 @@ export default function BasketballCampForm() {
 
         <div className={styles.warningBox}>
           <p>
-            By submitting this form, you acknowledge and accept the Friendship
+            By submitting this form, you acknowledge and accept the Butterfly
             Basketball Academy liability waiver and participation terms.
           </p>
         </div>

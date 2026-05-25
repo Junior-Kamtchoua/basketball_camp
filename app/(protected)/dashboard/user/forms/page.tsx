@@ -21,8 +21,8 @@ export default function UserFormsPage() {
         <h1>Registration Forms</h1>
 
         <p>
-          Complete your official Friendship Basketball Academy registration
-          forms directly inside your dashboard.
+          Complete your official Butterfly Basketball Academy registration forms
+          directly inside your dashboard.
         </p>
       </div>
 

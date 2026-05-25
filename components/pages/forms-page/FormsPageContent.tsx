@@ -52,7 +52,7 @@ export default function FormsPageContent() {
 
             <p className="page-text page-text--center">
               Access all important registration documents and academy forms
-              required for participation in Friendship Basketball Academy
+              required for participation in Butterfly Basketball Academy
               programs.
             </p>
           </div>

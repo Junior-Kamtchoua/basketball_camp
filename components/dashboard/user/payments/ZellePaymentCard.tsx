@@ -123,7 +123,7 @@ export default function ZellePaymentCard() {
       </div>
 
       <p className={styles.footer}>
-        Thank you for choosing Friendship Basketball Academy.
+        Thank you for choosing Butterfly Basketball Academy.
       </p>
     </section>
   );

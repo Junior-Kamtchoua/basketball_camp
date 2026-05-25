@@ -141,7 +141,7 @@ export default function ProgramsPageContent() {
             <h2 className="page-title">Professional Basketball Development</h2>
 
             <p className="page-text">
-              Friendship Basketball Academy provides a professional environment
+              Butterfly Basketball Academy provides a professional environment
               where athletes can improve their technical skills, physical
               conditioning and competitive mindset through elite coaching and
               structured training.

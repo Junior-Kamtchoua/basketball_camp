@@ -7,7 +7,7 @@ export default function ContactPage() {
     <>
       <PageBanner
         title="CONTACT US"
-        subtitle="Get in touch with Friendship Basketball Academy."
+        subtitle="Get in touch with Butterfly Basketball Academy."
       />
 
       <ContactPageContent />

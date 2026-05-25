@@ -66,7 +66,7 @@ export default function GalleryPageContent() {
         <div className="page-content-center">
           <span className="page-tag">FBA GALLERY</span>
 
-          <h2 className="page-title">Inside Friendship Basketball Academy</h2>
+          <h2 className="page-title">Inside Butterfly Basketball Academy</h2>
 
           <p className="page-text page-text--center">
             Explore moments from our training sessions, competitions, events and
