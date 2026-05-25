@@ -6,7 +6,7 @@ export default function AboutPage() {
   return (
     <>
       <PageBanner
-        title="ABOUT FBA"
+        title="ABOUT BBA"
         subtitle="Building athletes, leaders and character through basketball."
       />
 

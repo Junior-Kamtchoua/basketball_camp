@@ -9,7 +9,7 @@ export default function AboutPageContent() {
           <div>
             <img
               src="/images/about.png"
-              alt="About FBA"
+              alt="About BBA"
               className="page-image"
             />
           </div>

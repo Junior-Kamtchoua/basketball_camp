@@ -43,7 +43,7 @@ export default function Navbar() {
         <Link href="/" className="navbar__logo" onClick={closeMenu}>
           <Image
             src="/images/logo1.png"
-            alt="FBA Logo"
+            alt="BBA Logo"
             width={170}
             height={170}
             priority

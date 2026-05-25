@@ -62,7 +62,7 @@ export default function CoachesPageContent() {
         <div className="page-content-center">
           <span className="page-tag">OUR STAFF</span>
 
-          <h2 className="page-title">Meet The Coaches Behind FBA</h2>
+          <h2 className="page-title">Meet The Coaches Behind BBA</h2>
 
           <p className="page-text page-text--center">
             Our coaching staff is dedicated to helping every athlete maximize
