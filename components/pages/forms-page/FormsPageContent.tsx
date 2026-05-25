@@ -138,7 +138,7 @@ export default function FormsPageContent() {
 
               <div className="modal-step">
                 <span>2</span>
-                <p>Go to Dashboard → Payments section.</p>
+                <p>Go to Dashboard → Form section.</p>
               </div>
 
               <div className="modal-step">
