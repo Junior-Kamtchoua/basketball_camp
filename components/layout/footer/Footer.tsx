@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="footer__container">
         <div className="footer__top">
           <div className="footer__brand">
-            <h2 className="footer__logo">FBA</h2>
+            <h2 className="footer__logo">BBA</h2>
 
             <p className="footer__description">
               Butterfly Basketball Academy develops athletes through elite
