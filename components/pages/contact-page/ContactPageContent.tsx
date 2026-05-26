@@ -36,7 +36,7 @@ export default function ContactPageContent() {
     e.preventDefault();
 
     const text = `
-New FBA Contact Request
+New BBA Contact Request
 
 Name: ${formData.firstName} ${formData.lastName}
 
@@ -64,7 +64,7 @@ ${formData.message}
     <section className="page-section">
       <div className="page-container">
         <div className="page-content-center">
-          <span className="page-tag">CONTACT FBA</span>
+          <span className="page-tag">CONTACT BBA</span>
 
           <h2 className="page-title">Lets Build Greatness Together</h2>
 

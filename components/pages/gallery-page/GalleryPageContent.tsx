@@ -64,13 +64,13 @@ export default function GalleryPageContent() {
     <section className="page-section">
       <div className="page-container">
         <div className="page-content-center">
-          <span className="page-tag">FBA GALLERY</span>
+          <span className="page-tag">BBA GALLERY</span>
 
           <h2 className="page-title">Inside Butterfly Basketball Academy</h2>
 
           <p className="page-text page-text--center">
             Explore moments from our training sessions, competitions, events and
-            player development activities that define the FBA experience.
+            player development activities that define the BBA experience.
           </p>
         </div>
 

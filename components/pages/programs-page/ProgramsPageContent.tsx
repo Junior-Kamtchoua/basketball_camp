@@ -84,7 +84,7 @@ export default function ProgramsPageContent() {
     <section className="page-section">
       <div className="page-container">
         <div className="page-content-center">
-          <span className="page-tag">FBA TRAINING PROGRAMS</span>
+          <span className="page-tag">BBA TRAINING PROGRAMS</span>
 
           <h2 className="page-title">Designed For Growth & Excellence</h2>
 
@@ -136,7 +136,7 @@ export default function ProgramsPageContent() {
 
         <div className="programs-extra">
           <div className="programs-extra__content">
-            <span className="page-tag">WHY TRAIN WITH FBA</span>
+            <span className="page-tag">WHY TRAIN WITH BBA</span>
 
             <h2 className="page-title">Professional Basketball Development</h2>
 
