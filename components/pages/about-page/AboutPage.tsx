@@ -20,7 +20,7 @@ export default function AboutPageContent() {
             <h2 className="page-title">Building Leaders Through Basketball</h2>
 
             <p className="page-text">
-              Butterfly Basketball Academy (FBA) is more than a basketball
+              Butterfly Basketball Academy (BBA) is more than a basketball
               training center. We are a community dedicated to developing young
               athletes through discipline, teamwork, leadership and elite
               basketball education.
@@ -33,7 +33,7 @@ export default function AboutPageContent() {
             </p>
 
             <p className="page-text">
-              At FBA, every training session is designed to help athletes unlock
+              At BBA, every training session is designed to help athletes unlock
               their full potential both on and off the court. We focus on
               fundamentals, game situations, mental toughness and competitive
               excellence.
