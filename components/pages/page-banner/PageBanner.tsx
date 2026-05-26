@@ -11,7 +11,7 @@ export default function PageBanner({ title, subtitle }: Props) {
       <div className="page-banner__overlay"></div>
 
       <div className="page-banner__content">
-        <span className="page-banner__subtitle">FBA ACADEMY</span>
+        <span className="page-banner__subtitle">BBA ACADEMY</span>
 
         <h1>{title}</h1>
 
