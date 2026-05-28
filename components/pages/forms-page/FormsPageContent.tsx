@@ -46,7 +46,7 @@ export default function FormsPageContent() {
       <section className="page-section">
         <div className="page-container">
           <div className="page-content-center">
-            <span className="page-tag">FBA DOCUMENTS</span>
+            <span className="page-tag">BBA DOCUMENTS</span>
 
             <h2 className="page-title">Academy Forms & Resources</h2>
 
@@ -138,22 +138,15 @@ export default function FormsPageContent() {
 
               <div className="modal-step">
                 <span>2</span>
-                <p>Go to Dashboard → Form section.</p>
+                <p>
+                  Go to Dashboard → Form section and select your registration
+                  form.
+                </p>
               </div>
 
               <div className="modal-step">
                 <span>3</span>
-                <p>Select your registration form.</p>
-              </div>
-
-              <div className="modal-step">
-                <span>4</span>
-                <p>Complete the form and upload required documents.</p>
-              </div>
-
-              <div className="modal-step">
-                <span>5</span>
-                <p>Submit your registration for admin review.</p>
+                <p>Complete the form and submit for admin review</p>
               </div>
             </div>
 

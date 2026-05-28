@@ -4,37 +4,37 @@ import "./SchedulePageContent.css";
 const schedule = [
   {
     day: "Monday",
-    program: "Skills Development",
+    Training_Focus: "Skills Development",
     time: "5:00 PM - 7:00 PM",
     category: "Fundamentals",
   },
   {
     day: "Tuesday",
-    program: "Strength & Conditioning",
+    Training_Focus: "Strength & Conditioning",
     time: "5:30 PM - 7:30 PM",
     category: "Fitness",
   },
   {
     day: "Wednesday",
-    program: "Elite Academy Training",
+    Training_Focus: "Elite Academy Training",
     time: "6:00 PM - 8:00 PM",
     category: "Advanced",
   },
   {
     day: "Thursday",
-    program: "Shooting & Ball Handling",
+    Training_Focus: "Shooting & Ball Handling",
     time: "5:00 PM - 7:00 PM",
     category: "Skills",
   },
   {
     day: "Friday",
-    program: "Game Simulation",
+    Training_Focus: "Game Simulation",
     time: "5:30 PM - 8:00 PM",
     category: "Competition",
   },
   {
     day: "Saturday",
-    program: "Team Practice",
+    Training_Focus: "Team Practice",
     time: "10:00 AM - 1:00 PM",
     category: "Teamwork",
   },
@@ -87,7 +87,7 @@ export default function SchedulePageContent() {
           <div className="schedule-row schedule-row--head">
             <span>Day</span>
 
-            <span>Program</span>
+            <span>Training_Focus</span>
 
             <span>Time</span>
 
@@ -98,7 +98,7 @@ export default function SchedulePageContent() {
             <div className="schedule-row" key={index}>
               <span>{item.day}</span>
 
-              <span>{item.program}</span>
+              <span>{item.Training_Focus}</span>
 
               <span>{item.time}</span>
 

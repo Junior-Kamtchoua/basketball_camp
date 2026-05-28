@@ -1,94 +1,98 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-import { Users, CalendarDays, Trophy, CircleDot } from "lucide-react";
+import { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 import "./stats.css";
 
-const stats = [
+const faqs = [
   {
-    icon: <Users size={60} />,
-    value: 200,
-    suffix: "+",
-    label: "ATHLETES TRAINED",
+    question: "How old must players be?",
+    answer:
+      "Butterfly Basketball Academy welcomes players between 4 and 18 years old.",
   },
   {
-    icon: <CalendarDays size={60} />,
-    value: 5,
-    suffix: "+",
-    label: "YEARS OF IMPACT",
+    question: "Do players need previous basketball experience?",
+    answer:
+      "No. We welcome beginners, intermediate players, and advanced athletes. Our programs are designed to help every player grow at their own pace.",
   },
   {
-    icon: <Trophy size={60} />,
-    value: 100,
-    suffix: "+",
-    label: "SUCCESS STORIES",
+    question: "Are parents allowed to watch practice?",
+    answer:
+      "Yes. Parents are welcome to observe practices and follow their child's development throughout the season.",
   },
   {
-    icon: <CircleDot size={60} />,
-    value: 10,
-    suffix: "+",
-    label: "COMPETITIVE TEAMS",
+    question: "What should players bring to practice?",
+    answer:
+      "Players should bring basketball shoes, athletic clothing, a water bottle, and a positive attitude ready to learn and compete.",
+  },
+  {
+    question: "How are teams formed?",
+    answer:
+      "Teams are organized based on age, skill level, development goals, and competitive balance to provide the best learning experience.",
+  },
+  {
+    question: "How do registrations work?",
+    answer:
+      "To register, simply complete the registration form available in the User Dashboard under the Forms section. Once submitted, our staff will review your application and contact you with the next steps.",
   },
 ];
 
-function Counter({ target }: { target: number }) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    let current = 0;
-
-    let timer: NodeJS.Timeout;
-
-    const runCounter = () => {
-      timer = setInterval(() => {
-        current += 1;
-
-        setCount(current);
-
-        if (current >= target) {
-          clearInterval(timer);
-
-          setTimeout(() => {
-            current = 0;
-            runCounter();
-          }, 2500);
-        }
-      }, 40);
-    };
-
-    runCounter();
-
-    return () => clearInterval(timer);
-  }, [target]);
-
-  return <>{count}</>;
-}
-
 export default function Stats() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
     <section className="stats">
       <div className="stats__overlay"></div>
 
       <div className="stats__container">
         <div className="stats__header">
-          <h2 className="stats__title">MAKING AN IMPACT EVERY DAY</h2>
+          <span className="stats__subtitle">FREQUENTLY ASKED QUESTIONS</span>
 
-          <div className="stats__line"></div>
+          <h2 className="stats__title">
+            HAVE QUESTIONS?
+            <br />
+            WE HAVE ANSWERS.
+          </h2>
+
+          <p className="stats__description">
+            Find answers to the most common questions about Butterfly Basketball
+            Academy programs, registration, training, and player development.
+          </p>
         </div>
 
-        <div className="stats__grid">
-          {stats.map((stat, index) => (
-            <div className="stat__card" key={index}>
-              <div className="stat__icon">{stat.icon}</div>
+        <div className="faq">
+          {faqs.map((faq, index) => (
+            <div
+              className={`faq__item ${
+                openIndex === index ? "faq__item--active" : ""
+              }`}
+              key={index}
+            >
+              <button
+                className="faq__question"
+                onClick={() => toggleFAQ(index)}
+              >
+                <span>{faq.question}</span>
 
-              <h3 className="stat__number">
-                <Counter target={stat.value} />
-                {stat.suffix}
-              </h3>
+                {openIndex === index ? (
+                  <ChevronUp size={24} />
+                ) : (
+                  <ChevronDown size={24} />
+                )}
+              </button>
 
-              <p className="stat__label">{stat.label}</p>
+              <div
+                className={`faq__answer ${
+                  openIndex === index ? "faq__answer--open" : ""
+                }`}
+              >
+                <p>{faq.answer}</p>
+              </div>
             </div>
           ))}
         </div>
