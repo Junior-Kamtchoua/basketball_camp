@@ -14,56 +14,6 @@ const previews = [
     image: "/images/two.PNG",
     title: "Forms Page - Download PDF",
   },
-
-  {
-    image: "/images/three.PNG",
-    title: "Fill The Registration Form",
-  },
-
-  {
-    image: "/images/four.PNG",
-    title: "Resources",
-  },
-
-  {
-    image: "/images/five.PNG",
-    title: "Register",
-  },
-
-  {
-    image: "/images/six.PNG",
-    title: "Login",
-  },
-
-  {
-    image: "/images/seven.PNG",
-    title: "Messages",
-  },
-
-  {
-    image: "/images/eight.PNG",
-    title: "Messages",
-  },
-
-  {
-    image: "/images/nine.png",
-    title: "Payments",
-  },
-
-  {
-    image: "/images/ten.png",
-    title: "Payments",
-  },
-
-  {
-    image: "/images/eleven.png",
-    title: "Messages",
-  },
-
-  {
-    image: "/images/twelve.png",
-    title: "The End",
-  },
 ];
 
 export default function AppPreviewSection() {
