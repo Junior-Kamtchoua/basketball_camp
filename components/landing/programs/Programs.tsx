@@ -7,7 +7,7 @@ const programs = [
   {
     title: "SKILLS SESSIONS",
     description:
-      "Weekly basketball development sessions for boys and girls ages 4-18.",
+      "Weekly basketball development sessions for boys and girls ages 2-10.",
     image: "/images/hero2.png",
   },
   {
