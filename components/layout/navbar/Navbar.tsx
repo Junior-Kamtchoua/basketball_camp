@@ -13,15 +13,7 @@ import "./navbar.css";
 const navLinks = [
   { label: "Home", href: "/" },
 
-  { label: "About", href: "/about" },
-
-  { label: "Programs", href: "/programs" },
-
   { label: "Schedule", href: "/schedule" },
-
-  { label: "Coaches", href: "/coaches" },
-
-  { label: "Gallery", href: "/gallery" },
 
   { label: "Forms", href: "/forms" },
 
@@ -45,7 +37,7 @@ export default function Navbar() {
             src="/images/logo1.png"
             alt="BBA Logo"
             width={170}
-            height={170}
+            height={50}
             priority
             className="navbar__logo-image"
           />

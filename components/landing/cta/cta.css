@@ -14,11 +14,7 @@
   position: absolute;
   inset: 0;
 
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.82),
-    rgba(0, 0, 0, 0.88)
-  );
+  background: rgba(255, 255, 255, 0.184);
 }
 
 .cta__container {
@@ -46,7 +42,7 @@
 }
 
 .cta__title {
-  color: white;
+  color: black;
 
   font-size: clamp(2.5rem, 5vw, 5rem);
   font-weight: 900;
@@ -59,7 +55,7 @@
   max-width: 750px;
   margin: auto auto 3rem;
 
-  color: #d1d1d1;
+  color: black;
 
   font-size: 1.2rem;
   line-height: 1.9;
@@ -83,7 +79,7 @@
 .cta__quote p {
   margin-bottom: 1.5rem;
 
-  color: #f1f1f1;
+  color: black;
 
   font-size: 1.1rem;
   line-height: 2;
@@ -94,7 +90,7 @@
 
   margin-top: 1rem;
 
-  color: #3b5cff;
+  color: black;
 
   font-size: 1.1rem;
   font-weight: 700;
@@ -111,7 +107,7 @@
   border-radius: 14px;
 
   background: #3b5cff;
-  color: white;
+  color: black;
 
   font-size: 1rem;
   font-weight: 700;

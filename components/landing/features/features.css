@@ -1,7 +1,7 @@
 .features {
   width: 100%;
 
-  background: #020817;
+  background: white;
 
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -58,7 +58,7 @@
 }
 
 .feature__title {
-  color: white;
+  color: black;
 
   font-size: 1.2rem;
   font-weight: 800;
@@ -71,7 +71,7 @@
 .feature__description {
   max-width: 240px;
 
-  color: rgba(255, 255, 255, 0.75);
+  color: black;
 
   font-size: 1rem;
   line-height: 1.8;

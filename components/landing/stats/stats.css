@@ -16,11 +16,7 @@
   position: absolute;
   inset: 0;
 
-  background: linear-gradient(
-    90deg,
-    rgba(1, 10, 28, 0.97),
-    rgba(2, 16, 44, 0.92)
-  );
+  background: white;
 }
 
 .stats__container {
@@ -49,7 +45,7 @@
 }
 
 .stats__title {
-  color: white;
+  color: black;
 
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 900;
@@ -62,7 +58,7 @@
   max-width: 700px;
   margin: auto;
 
-  color: rgba(255, 255, 255, 0.8);
+  color: black;
 
   font-size: 1.15rem;
   line-height: 1.8;
@@ -75,7 +71,7 @@
 }
 
 .faq__item {
-  background: rgba(255, 255, 255, 0.05);
+  background: white;
 
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
@@ -105,7 +101,7 @@
   background: transparent;
   border: none;
 
-  color: white;
+  color: black;
 
   font-size: 1.15rem;
   font-weight: 700;
@@ -133,7 +129,7 @@
 .faq__answer p {
   padding: 0 2rem 2rem;
 
-  color: rgba(255, 255, 255, 0.8);
+  color: black;
 
   line-height: 1.8;
   font-size: 1rem;
